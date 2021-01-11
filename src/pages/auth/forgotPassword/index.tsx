@@ -1,8 +1,8 @@
+import NextLayout from '@/components/NextLayout';
 import { PageLoading } from '@ant-design/pro-layout';
 import ForgotPassword from '@next-component/Auth/ForgotPassword';
 import React, { memo, useEffect } from 'react';
 import { useHistory, useModel } from 'umi';
-import css from './register.less';
 
 type indexProps = any;
 
@@ -22,6 +22,7 @@ const index: React.FC<indexProps> = memo(() => {
   }));
 
   const history = useHistory();
+
   useEffect(() => {
     if (errorResetPassword) {
       setState({ forgotEmailField: '' });
@@ -30,7 +31,7 @@ const index: React.FC<indexProps> = memo(() => {
 
   return (
     <>
-      <div className={css['auth_page']}>
+      <NextLayout>
         {loadingResetPassword ? (
           <PageLoading />
         ) : (
@@ -42,11 +43,19 @@ const index: React.FC<indexProps> = memo(() => {
                 isHideEmail: Boolean(forgotEmailField),
                 isHasPasswordField: Boolean(forgotEmailField),
                 goBackProps: { onClick: () => history.goBack() },
+                colProps: {
+                  xs: 24,
+                  sm: 16,
+                  md: 16,
+                  lg: 7,
+                  xl: 7,
+                  xxl: 8,
+                },
               },
             }}
           />
         )}
-      </div>
+      </NextLayout>
     </>
   );
 });

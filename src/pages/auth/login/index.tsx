@@ -1,7 +1,7 @@
-import Layout from '@/components/Layout';
+import NextLayout from '@/components/NextLayout';
+import { ROUTE } from '@/constants/routePath';
 import NextSignIn from '@next-component/Auth/SignIn';
-import { clearToken } from '@next-dev/core/es/authority';
-import React, { memo, useEffect } from 'react';
+import React, { memo } from 'react';
 import { useModel } from 'umi';
 
 type logInProps = any;
@@ -12,16 +12,13 @@ const LogIn: React.FC<logInProps> = memo(() => {
     loadingLogin: m.loadingLogin,
   }));
 
-  useEffect(() => {
-    clearToken();
-  }, []);
-
   return (
-    <Layout>
+    <NextLayout>
       <NextSignIn
         {...{
           onFinish: model.onSubmitLogin,
           next: {
+            forgotPassPath: ROUTE.forgotPassword,
             submitBtnProps: {
               loading: model.loadingLogin,
             },
@@ -36,7 +33,7 @@ const LogIn: React.FC<logInProps> = memo(() => {
           },
         }}
       />
-    </Layout>
+    </NextLayout>
   );
 });
 

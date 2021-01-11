@@ -21,6 +21,14 @@ const index: React.FC<indexProps> = memo(() => {
               signUpBtnProps: {
                 loading: loadingRegister,
               },
+              colProps: {
+                xs: 24,
+                sm: 16,
+                md: 16,
+                lg: 7,
+                xl: 7,
+                xxl: 8,
+              },
             },
           }}
         />

@@ -27,9 +27,17 @@ export default [
         path: '/auth',
         routes: [
           {
+            name: 'forgot-password',
+            path: '/auth/forgot-password',
+            component: './auth/forgotPassword',
+          },
+          {
             name: 'login',
             path: '/auth/login',
             component: './auth/login',
+          },
+          {
+            component: './404',
           },
         ],
       },

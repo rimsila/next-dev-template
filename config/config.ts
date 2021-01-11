@@ -11,7 +11,7 @@ export default defineConfig({
   hash: true,
   antd: {},
   layout: {
-    name: 'Ant Design Pro',
+    name: 'Sila Next Dev',
     locale: true,
     siderWidth: 208,
     ...defaultSettings,

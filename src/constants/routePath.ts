@@ -1,6 +1,6 @@
 export const ROUTE = {
   login: '/auth/login',
   home: '/',
-  forgotPassword: '/forgot-password',
+  forgotPassword: '/auth/forgot-password',
   register: '/register',
 };
