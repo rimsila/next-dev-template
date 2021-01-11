@@ -16,3 +16,8 @@ export const codeHttpMsg = {
   503: 'The service is unavailable, the server is temporarily overloaded or maintained. ',
   504: 'The gateway has timed out. ',
 };
+
+export const httpCommon = {
+  page404: 'Sorry, the page you visited does not exist.',
+  protected: 'Sorry,this page does not exist or unauthorized.',
+};

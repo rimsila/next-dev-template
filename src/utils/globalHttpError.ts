@@ -60,8 +60,10 @@ export const handlerGlobalErr = (configMsg: any) => {
    * @Method diff GET will handler here
    */
   // @ts-ignore
-  if (method !== 'GET' || method !== 'get' || !invalidUser) {
-    showFullTipFunc();
+  if (method !== 'GET' || method !== 'get') {
+    if (!invalidUser) {
+      showFullTipFunc();
+    }
   }
 
   /**
