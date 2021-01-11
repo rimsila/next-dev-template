@@ -25,8 +25,7 @@
       "@config/*": ["./config/*"],
       "@next-core/*": ["./node_modules/@next-dev/core/es/*"],
       "@next-component/*": ["./node_modules/@next-dev/component/es/*"],
-      "@next-hooks/*": ["./node_modules/@next-dev/hooks/es/*"],
-      "@next-provider/*": ["./node_modules/@next-dev/provider/es/*"]
+      "@next-hooks/*": ["./node_modules/@next-dev/hooks/es/*"]
     }
   },
   "include": [

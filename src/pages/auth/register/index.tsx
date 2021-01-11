@@ -12,7 +12,7 @@ const index: React.FC<indexProps> = memo(() => {
   }));
   return (
     <>
-      <div className={css['auth_page']}>
+      <div className={css.auth_page}>
         <NextSignUp
           {...{
             onFinish: onSubmitRegister,

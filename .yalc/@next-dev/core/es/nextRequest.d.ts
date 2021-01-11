@@ -1,10 +1,10 @@
 import axios, { AxiosRequestConfig, Method, AxiosResponse } from 'axios';
 import { CryptoType, IKeyValue } from './core';
-export interface IRequestOption extends AxiosRequestConfig {
+export declare type IRequestOption = {
     successTip?: boolean;
     method?: Method;
     crypto?: CryptoType;
-}
+} & AxiosRequestConfig;
 declare let instance: import("axios").AxiosInstance;
 export declare const configInstance: (config: AxiosRequestConfig) => void;
 declare let globalHeaders: () => IKeyValue<string>;

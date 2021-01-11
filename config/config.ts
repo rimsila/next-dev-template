@@ -1,4 +1,5 @@
 // https://umijs.org/config/
+import { join } from 'path';
 import { defineConfig } from 'umi';
 import defaultSettings from './defaultSettings';
 import proxy from './proxy';
@@ -40,5 +41,16 @@ export default defineConfig({
   proxy: proxy[REACT_APP_ENV || 'dev'],
   manifest: {
     basePath: '/',
+  },
+  alias: {
+    themes: join(__dirname, '../src/themes'),
+    '@config': join(__dirname, '../config'),
+    // '@modules': join(__dirname, './src/modules'),
+    '@next-core': join(__dirname, '../node_modules/@next-dev/core/es'),
+    '@next-hooks': join(__dirname, '../node_modules/@next-dev/hooks/es'),
+    '@next-component': join(__dirname, '../node_modules/@next-dev/component/es'),
+  },
+  lessLoader: {
+    javascriptEnabled: true,
   },
 });

@@ -1,15 +1,15 @@
 ﻿export default [
   {
-    path: '/user',
+    path: '/auth',
     layout: false,
     routes: [
       {
-        path: '/user',
+        path: '/auth',
         routes: [
           {
             name: 'login',
-            path: '/user/login',
-            component: './User/login',
+            path: '/auth/login',
+            component: './auth/login',
           },
         ],
       },
@@ -21,27 +21,7 @@
     icon: 'smile',
     component: './Welcome',
   },
-  {
-    path: '/admin',
-    name: 'admin',
-    icon: 'crown',
-    access: 'canAdmin',
-    component: './Admin',
-    routes: [
-      {
-        path: '/admin/sub-page',
-        name: 'sub-page',
-        icon: 'smile',
-        component: './Welcome',
-      },
-    ],
-  },
-  {
-    name: 'list.table-list',
-    icon: 'table',
-    path: '/list',
-    component: './TableList',
-  },
+
   {
     path: '/',
     redirect: '/welcome',

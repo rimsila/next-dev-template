@@ -1,7 +1,8 @@
+import Layout from '@/components/Layout';
 import NextSignIn from '@next-component/Auth/SignIn';
-import React, { memo } from 'react';
+import { clearToken } from '@next-dev/core/es/authority';
+import React, { memo, useEffect } from 'react';
 import { useModel } from 'umi';
-import css from './login.less';
 
 type logInProps = any;
 
@@ -11,8 +12,12 @@ const LogIn: React.FC<logInProps> = memo(() => {
     loadingLogin: m.loadingLogin,
   }));
 
+  useEffect(() => {
+    clearToken();
+  }, []);
+
   return (
-    <div className={css['auth_page']}>
+    <Layout>
       <NextSignIn
         {...{
           onFinish: model.onSubmitLogin,
@@ -20,10 +25,18 @@ const LogIn: React.FC<logInProps> = memo(() => {
             submitBtnProps: {
               loading: model.loadingLogin,
             },
+            colProps: {
+              xs: 24,
+              sm: 16,
+              md: 16,
+              lg: 7,
+              xl: 7,
+              xxl: 8,
+            },
           },
         }}
       />
-    </div>
+    </Layout>
   );
 });
 
