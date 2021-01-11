@@ -1,9 +1,6 @@
 ﻿/**
  * Permission definition
  */
-
-import { ROUTE } from '@/constants/routePath';
-
 //example role crud
 export const Permissions = {
   template: {
@@ -31,7 +28,7 @@ export default [
         routes: [
           {
             name: 'forgot-password',
-            path: ROUTE.forgotPassword,
+            path: '/auth/forgot-password',
             component: './auth/forgotPassword',
           },
           {
