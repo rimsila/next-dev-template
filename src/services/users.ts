@@ -12,10 +12,10 @@ export const usersApi = {
     }),
 
   // * ------ getProfile ------
-  getProfile: () => nextRequest('GET', API_ROUTE.getProfile, {}),
+  getProfile: () => nextRequest('GET', API_ROUTE.getProfile, { hasPassByParam: true }),
 
   // * ------ logout ------
-  logout: () => nextRequest('POST', '/user/logout', {}),
+  logout: () => nextRequest('POST', '/user/logout', { hasParamData: true }),
 
   // * ------ forgotPassword ------
   forgotPassword: (data: any) => {

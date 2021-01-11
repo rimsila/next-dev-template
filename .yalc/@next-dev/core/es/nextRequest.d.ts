@@ -2,9 +2,20 @@ import axios, { AxiosRequestConfig, Method, AxiosResponse } from 'axios';
 import { CryptoType, IKeyValue } from './core';
 export declare type IRequestOption = {
     successTip?: boolean;
+    errorTip?: boolean;
+    fullTip?: boolean;
+    hasParam?: boolean;
+    hasParamData?: boolean;
+    hasPassByParam?: boolean;
+    debug?: boolean;
+    hasDfHandleErr?: boolean;
     method?: Method;
     crypto?: CryptoType;
 } & AxiosRequestConfig;
+export declare const handlerFunc: (configMsg: {
+    msg?: string;
+    isErr?: boolean;
+} & IRequestOption) => import("antd/lib/message").MessageType;
 declare let instance: import("axios").AxiosInstance;
 export declare const configInstance: (config: AxiosRequestConfig) => void;
 declare let globalHeaders: () => IKeyValue<string>;
@@ -18,13 +29,6 @@ declare const commonResponseWithRefreshTokenInterceptor: (((response: AxiosRespo
     response: AxiosResponse;
 }) => Promise<unknown>))[];
 export declare function request<TResult = any>(opt: IRequestOption): Promise<TResult>;
-export declare function get<TResult = any>(url: string, opt?: IRequestOption): Promise<TResult>;
-export declare function post<TResult = any>(url: string, opt?: IRequestOption): Promise<TResult>;
-export declare function put<TResult = any>(url: string, opt?: IRequestOption): Promise<TResult>;
-export declare function patch<TResult = any>(url: string, opt?: IRequestOption): Promise<TResult>;
-export declare function del<TResult = any>(url: string, opt?: IRequestOption): Promise<TResult>;
-export declare function head<TResult = any>(url: string, opt?: IRequestOption): Promise<TResult>;
-export declare function options<TResult = any>(url: string, opt?: IRequestOption): Promise<TResult>;
 declare function addRequestInterceptor(onFulfilled?: (value: any) => any | Promise<any>, onRejected?: (error: any) => any): number;
 declare function ejectRequestInterceptor(interceptorId: number): void;
 declare function addResponseInterceptor(onFulfilled?: (value: any) => any | Promise<any>, onRejected?: (error: any) => any): number;

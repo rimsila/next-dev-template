@@ -13,3 +13,4 @@ declare module 'store' {
   export function remove(key: string): void;
   export function clearAll(): void;
 }
+declare type MethodType = 'GET' | 'DELETE' | 'POST' | 'PUT' | 'PATCH';

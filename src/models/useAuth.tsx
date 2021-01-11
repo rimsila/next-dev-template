@@ -105,6 +105,8 @@ export default function useAuthModel() {
   } = useRequest(usersApi.login, {
     manual: true,
     onSuccess: async (res) => {
+      console.log('res', res);
+
       if (res?.status === 1) {
         setToken({ token: LoginData?.data?.accessKey });
         goGo();

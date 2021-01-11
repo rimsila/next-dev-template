@@ -44,6 +44,9 @@ declare namespace API {
       status?: string;
       avatar?: string;
     };
+    currentUser?: {
+      permissions: [];
+    };
     message: Record<string, unknown>;
     status: number;
   };

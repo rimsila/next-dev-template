@@ -12,11 +12,33 @@ function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { va
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
 
 import axios from 'axios';
-import omit from 'lodash/omit';
 import { getToken, setToken } from './authority';
 import { newGuid } from './utils';
 import { encrypt, decrypt, encryptKey } from './crypto';
 import { CryptoType } from './core';
+export var handlerFunc = function handlerFunc(configMsg) {
+  var _ref = configMsg || {},
+      errorTip = _ref.errorTip,
+      fullTip = _ref.fullTip,
+      msg = _ref.msg,
+      isErr = _ref.isErr,
+      debug = _ref.debug,
+      method = _ref.method;
+
+  var showTips = errorTip ? _message.success : _message.error;
+  var showFullTip = fullTip && isErr ? _message.error : _message.success;
+  var showMsg = typeof msg === 'string' && msg || (isErr ? 'something went wrong. please try gain!' : 'successfully!');
+
+  if (debug) {
+    console.log("debug ".concat(isErr ? 'err' : 'succ'), configMsg);
+  }
+
+  if (fullTip && method !== 'get') {
+    return showFullTip(showMsg);
+  }
+
+  return showTips(showMsg);
+};
 var instance = axios.create({
   headers: {
     'Content-Type': 'application/json'
@@ -71,16 +93,14 @@ var commonRequestInterceptor = [function (option) {
   return config;
 }];
 var commonResponseInterceptor = [function (response) {
-  var data = response.data,
-      config = response.config;
+  var _ref2 = response || {},
+      data = _ref2.data,
+      config = _ref2.config;
+
   var requestConfig = config;
 
   if (requestConfig.responseType && requestConfig.responseType.toLowerCase() === 'arraybuffer') {
     return Promise.resolve(data);
-  }
-
-  if (requestConfig.successTip) {
-    _message.success('Operation successful', 2);
   }
 
   if (requestConfig.crypto === CryptoType.Out || requestConfig.crypto === CryptoType.Both) {
@@ -91,8 +111,8 @@ var commonResponseInterceptor = [function (response) {
   }
 
   return Promise.resolve(data);
-}, function (_ref) {
-  var response = _ref.response;
+}, function (_ref3) {
+  var response = _ref3.response;
   return Promise.reject(response);
 }];
 var isRefreshing = false;
@@ -114,8 +134,8 @@ var commonResponseWithRefreshTokenInterceptor = [function (response) {
   }
 
   return Promise.resolve(data);
-}, function (_ref2) {
-  var response = _ref2.response;
+}, function (_ref4) {
+  var response = _ref4.response;
 
   if (!response || response.status !== 401) {
     return Promise.reject(response);
@@ -182,226 +202,6 @@ function _request() {
     }, _callee);
   }));
   return _request.apply(this, arguments);
-}
-
-export function get(_x2, _x3) {
-  return _get.apply(this, arguments);
-}
-
-function _get() {
-  _get = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee2(url, opt) {
-    return regeneratorRuntime.wrap(function _callee2$(_context2) {
-      while (1) {
-        switch (_context2.prev = _context2.next) {
-          case 0:
-            _context2.next = 2;
-            return request(_objectSpread(_objectSpread({
-              url: url
-            }, omit(opt, 'data')), {}, {
-              method: 'get',
-              params: _objectSpread({
-                timespan: new Date().getTime()
-              }, opt === null || opt === void 0 ? void 0 : opt.data),
-              successTip: false
-            }));
-
-          case 2:
-            return _context2.abrupt("return", _context2.sent);
-
-          case 3:
-          case "end":
-            return _context2.stop();
-        }
-      }
-    }, _callee2);
-  }));
-  return _get.apply(this, arguments);
-}
-
-export function post(_x4, _x5) {
-  return _post.apply(this, arguments);
-}
-
-function _post() {
-  _post = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee3(url, opt) {
-    return regeneratorRuntime.wrap(function _callee3$(_context3) {
-      while (1) {
-        switch (_context3.prev = _context3.next) {
-          case 0:
-            _context3.next = 2;
-            return request(_objectSpread(_objectSpread({
-              url: url,
-              successTip: true
-            }, opt), {}, {
-              method: 'post'
-            }));
-
-          case 2:
-            return _context3.abrupt("return", _context3.sent);
-
-          case 3:
-          case "end":
-            return _context3.stop();
-        }
-      }
-    }, _callee3);
-  }));
-  return _post.apply(this, arguments);
-}
-
-export function put(_x6, _x7) {
-  return _put.apply(this, arguments);
-}
-
-function _put() {
-  _put = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee4(url, opt) {
-    return regeneratorRuntime.wrap(function _callee4$(_context4) {
-      while (1) {
-        switch (_context4.prev = _context4.next) {
-          case 0:
-            _context4.next = 2;
-            return request(_objectSpread(_objectSpread({
-              url: url,
-              successTip: true
-            }, opt), {}, {
-              method: 'put'
-            }));
-
-          case 2:
-            return _context4.abrupt("return", _context4.sent);
-
-          case 3:
-          case "end":
-            return _context4.stop();
-        }
-      }
-    }, _callee4);
-  }));
-  return _put.apply(this, arguments);
-}
-
-export function patch(_x8, _x9) {
-  return _patch.apply(this, arguments);
-}
-
-function _patch() {
-  _patch = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee5(url, opt) {
-    return regeneratorRuntime.wrap(function _callee5$(_context5) {
-      while (1) {
-        switch (_context5.prev = _context5.next) {
-          case 0:
-            _context5.next = 2;
-            return request(_objectSpread(_objectSpread({
-              url: url,
-              successTip: true
-            }, opt), {}, {
-              method: 'patch'
-            }));
-
-          case 2:
-            return _context5.abrupt("return", _context5.sent);
-
-          case 3:
-          case "end":
-            return _context5.stop();
-        }
-      }
-    }, _callee5);
-  }));
-  return _patch.apply(this, arguments);
-}
-
-export function del(_x10, _x11) {
-  return _del.apply(this, arguments);
-}
-
-function _del() {
-  _del = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee6(url, opt) {
-    return regeneratorRuntime.wrap(function _callee6$(_context6) {
-      while (1) {
-        switch (_context6.prev = _context6.next) {
-          case 0:
-            _context6.next = 2;
-            return request(_objectSpread(_objectSpread({
-              url: url,
-              successTip: true
-            }, opt), {}, {
-              method: 'delete'
-            }));
-
-          case 2:
-            return _context6.abrupt("return", _context6.sent);
-
-          case 3:
-          case "end":
-            return _context6.stop();
-        }
-      }
-    }, _callee6);
-  }));
-  return _del.apply(this, arguments);
-}
-
-export function head(_x12, _x13) {
-  return _head.apply(this, arguments);
-}
-
-function _head() {
-  _head = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee7(url, opt) {
-    return regeneratorRuntime.wrap(function _callee7$(_context7) {
-      while (1) {
-        switch (_context7.prev = _context7.next) {
-          case 0:
-            _context7.next = 2;
-            return request(_objectSpread(_objectSpread({
-              url: url,
-              successTip: true
-            }, opt), {}, {
-              method: 'HEAD'
-            }));
-
-          case 2:
-            return _context7.abrupt("return", _context7.sent);
-
-          case 3:
-          case "end":
-            return _context7.stop();
-        }
-      }
-    }, _callee7);
-  }));
-  return _head.apply(this, arguments);
-}
-
-export function options(_x14, _x15) {
-  return _options.apply(this, arguments);
-}
-
-function _options() {
-  _options = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee8(url, opt) {
-    return regeneratorRuntime.wrap(function _callee8$(_context8) {
-      while (1) {
-        switch (_context8.prev = _context8.next) {
-          case 0:
-            _context8.next = 2;
-            return request(_objectSpread(_objectSpread({
-              url: url,
-              successTip: true
-            }, opt), {}, {
-              method: 'OPTIONS'
-            }));
-
-          case 2:
-            return _context8.abrupt("return", _context8.sent);
-
-          case 3:
-          case "end":
-            return _context8.stop();
-        }
-      }
-    }, _callee8);
-  }));
-  return _options.apply(this, arguments);
 }
 
 function addRequestInterceptor(onFulfilled, onRejected) {
