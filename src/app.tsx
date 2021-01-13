@@ -2,6 +2,7 @@ import Footer from '@/components/Footer';
 import RightContent from '@/components/RightContent';
 import type { Settings as LayoutSettings } from '@ant-design/pro-layout';
 import { PageLoading } from '@ant-design/pro-layout';
+import '@next-dev/component/es/style/index.less';
 import React from 'react';
 import type { RunTimeLayoutConfig } from 'umi';
 import { history } from 'umi';
