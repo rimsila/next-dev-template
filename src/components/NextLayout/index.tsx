@@ -21,10 +21,11 @@ export default (props: ILayout) => {
         ...rest,
       }}
     >
-      <ProCard direction="column" ghost gutter={[0, 60]}>
+      <ProCard direction="column" ghost gutter={[0]}>
         <ProCard
           layout="center"
           style={{
+            height: '100vh',
             ...contentInnerStyle,
           }}
         >

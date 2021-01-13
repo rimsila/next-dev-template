@@ -1,7 +1,7 @@
+import NextLayout from '@/components/NextLayout';
 import NextSignUp from '@next-component/Auth/SignUp';
 import React, { memo } from 'react';
 import { useModel } from 'umi';
-import css from './register.less';
 
 type indexProps = any;
 
@@ -12,7 +12,7 @@ const index: React.FC<indexProps> = memo(() => {
   }));
   return (
     <>
-      <div className={css.auth_page}>
+      <NextLayout>
         <NextSignUp
           {...{
             onFinish: onSubmitRegister,
@@ -21,18 +21,10 @@ const index: React.FC<indexProps> = memo(() => {
               signUpBtnProps: {
                 loading: loadingRegister,
               },
-              colProps: {
-                xs: 24,
-                sm: 16,
-                md: 16,
-                lg: 7,
-                xl: 7,
-                xxl: 6,
-              },
             },
           }}
         />
-      </div>
+      </NextLayout>
     </>
   );
 });

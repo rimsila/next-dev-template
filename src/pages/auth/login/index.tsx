@@ -19,16 +19,9 @@ const LogIn: React.FC<logInProps> = memo(() => {
           onFinish: model.onSubmitLogin,
           next: {
             forgotPassPath: ROUTE.forgotPassword,
+            registerPath: ROUTE.register,
             submitBtnProps: {
               loading: model.loadingLogin,
-            },
-            colProps: {
-              xs: 24,
-              sm: 16,
-              md: 16,
-              lg: 7,
-              xl: 7,
-              xxl: 6,
             },
           },
         }}

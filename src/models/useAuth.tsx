@@ -1,33 +1,22 @@
+import { useRoute } from '@/hooks/useRoute';
 import type { IForgotPassword, ILogin } from '@/services/global';
 import { usersApi } from '@/services/users';
-import { clearToken, setToken } from '@next-core/authority';
+import { setToken } from '@next-core/authority';
 import { useRequest, useSetState } from 'ahooks/es';
-import { stringify } from 'qs';
-import { history, useModel } from 'umi';
+import { useModel } from 'umi';
 
 type IState = {
   forgotEmailField: string;
 };
 
 export default function useAuthModel() {
-  const { query, pathname } = history.location;
-  const { redirect } = query as { redirect: string };
+  const { initialState } = useModel('@@initialState');
 
-  const { initialState, setInitialState } = useModel('@@initialState');
+  const { goHomeRedirect, logoutRedirect, goLogin } = useRoute();
 
   const [state, setState] = useSetState<IState>({
     forgotEmailField: '',
   });
-
-  /**
-   * This method will jump to the location of the redirect parameter
-   */
-  const goGo = () => {
-    if (!history) return;
-    setTimeout(() => {
-      history.push(redirect || '/');
-    }, 10);
-  };
 
   // * ------------ resetPassword --------------
   /**
@@ -77,16 +66,7 @@ export default function useAuthModel() {
     manual: true,
     onSuccess: (res) => {
       if (res?.status === 1 && initialState) {
-        setInitialState({ ...initialState, currentUser: undefined });
-        clearToken();
-        if (history?.location?.pathname !== '/login' && !redirect) {
-          history.replace({
-            pathname: '/login',
-            search: stringify({
-              redirect: pathname,
-            }),
-          });
-        }
+        logoutRedirect();
       }
     },
   });
@@ -105,11 +85,9 @@ export default function useAuthModel() {
   } = useRequest(usersApi.login, {
     manual: true,
     onSuccess: async (res) => {
-      console.log('res', res);
-
       if (res?.status === 1) {
         setToken({ token: LoginData?.data?.accessKey });
-        goGo();
+        goHomeRedirect();
       }
     },
   });
@@ -136,7 +114,7 @@ export default function useAuthModel() {
     manual: true,
     onSuccess: (res) => {
       if (res?.status === 1) {
-        history.push('/login');
+        goLogin();
       }
     },
   });

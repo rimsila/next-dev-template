@@ -1,18 +1,19 @@
 import { httpCommon } from '@/constants/http';
-import { ROUTE } from '@/constants/routePath';
+import { useRoute } from '@/hooks/useRoute';
 import { getToken } from '@next-dev/core/es/authority';
 import { Button, message, Result } from 'antd';
 import React, { useEffect } from 'react';
-import { history, useModel } from 'umi';
+import { useModel } from 'umi';
 
 const NoFoundPage: React.FC = () => {
   const { initialState } = useModel('@@initialState');
+  const { goHome } = useRoute();
   useEffect(() => {
     if (!getToken()?.token && !initialState?.currentUser) {
-      history.push(ROUTE.login);
+      goHome();
       message.warn(httpCommon.protected, 3);
     }
-  }, [initialState?.currentUser]);
+  }, [goHome, initialState?.currentUser]);
 
   return (
     <Result
@@ -20,7 +21,7 @@ const NoFoundPage: React.FC = () => {
       title="404"
       subTitle={httpCommon.page404}
       extra={
-        <Button type="primary" onClick={() => history.push('/')}>
+        <Button type="primary" onClick={() => goHome()}>
           Back Home
         </Button>
       }

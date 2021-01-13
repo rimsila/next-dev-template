@@ -43,14 +43,6 @@ const index: React.FC<indexProps> = memo(() => {
                 isHideEmail: Boolean(forgotEmailField),
                 isHasPasswordField: Boolean(forgotEmailField),
                 goBackProps: { onClick: () => history.goBack() },
-                colProps: {
-                  xs: 24,
-                  sm: 16,
-                  md: 16,
-                  lg: 7,
-                  xl: 7,
-                  xxl: 6,
-                },
               },
             }}
           />

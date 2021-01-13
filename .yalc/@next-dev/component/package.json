@@ -1,6 +1,6 @@
 {
   "name": "@next-dev/component",
-  "version": "0.6.1+6f14ad9a",
+  "version": "0.6.1+89649685",
   "description": "@wetrial/component",
   "module": "es/index.js",
   "types": "lib/index.d.ts",
@@ -49,5 +49,5 @@
     "ahooks": "^2.5.0",
     "rc-footer": "^0.6.3"
   },
-  "yalcSig": "6f14ad9a1637232c3e8b9514db2458da"
+  "yalcSig": "896496855c1c001e38c852279d878fa9"
 }
