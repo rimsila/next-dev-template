@@ -12,11 +12,9 @@ const Settings: LayoutSettings & {
   iconfontUrl: '',
   navTheme: 'dark',
   primaryColor: '#1890ff',
-  layout: 'top',
+  layout: 'mix',
   contentWidth: 'Fluid',
   fixedHeader: true,
-  fixSiderbar: true,
-  splitMenus: false,
 };
 
 export default Settings;
