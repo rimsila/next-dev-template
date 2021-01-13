@@ -49,7 +49,7 @@ const index: React.FC<indexProps> = memo(() => {
                   md: 16,
                   lg: 7,
                   xl: 7,
-                  xxl: 8,
+                  xxl: 6,
                 },
               },
             }}
