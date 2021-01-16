@@ -53,15 +53,33 @@ export default [
     ],
   },
   {
-    path: '/welcome',
-    name: 'welcome',
+    path: ROUTE.userManagement,
+    name: 'User Management',
+    icon: 'smile',
+    component: './Welcome',
+  },
+  {
+    path: ROUTE.supplierManagement,
+    name: 'Supplier Management',
+    icon: 'smile',
+    component: './Welcome',
+  },
+  {
+    path: ROUTE.accountManagement,
+    name: 'Account Management',
+    icon: 'smile',
+    component: './Welcome',
+  },
+  {
+    path: ROUTE.reportManagement,
+    name: 'Report Management',
     icon: 'smile',
     component: './Welcome',
   },
 
   {
-    path: '/',
-    redirect: '/welcome',
+    path: ROUTE.home,
+    redirect: ROUTE.stockManagement,
   },
   {
     component: './404',

@@ -2,7 +2,7 @@ import { useRoute } from '@/hooks/useRoute';
 import type { IForgotPassword, ILogin } from '@/services/global';
 import { usersApi } from '@/services/users';
 import { setToken } from '@next-core/authority';
-import { useRequest, useSetState } from 'ahooks/es';
+import { usePersistFn, useRequest, useSetState } from 'ahooks/es';
 import { useModel } from 'umi';
 
 type IState = {
@@ -29,11 +29,11 @@ export default function useAuthModel() {
     loading: loadingResetPassword,
   } = useRequest(usersApi.forgotPassword, {
     manual: true,
-    onSuccess: (res) => {
+    onSuccess: usePersistFn((res) => {
       if (res?.status === 1) {
         setState({ forgotEmailField: '' }); //* clear forgotEmailField
       }
-    },
+    }),
   });
 
   // * ------------ onResetPassword --------------
