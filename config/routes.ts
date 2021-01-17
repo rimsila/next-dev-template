@@ -53,6 +53,12 @@ export default [
     ],
   },
   {
+    path: ROUTE.stockManagement,
+    name: 'Stock Management',
+    icon: 'smile',
+    component: './Welcome',
+  },
+  {
     path: ROUTE.userManagement,
     name: 'User Management',
     icon: 'smile',
