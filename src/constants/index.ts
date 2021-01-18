@@ -1,7 +1,12 @@
-export const IS_PROD = process.env.node === 'production';
-// api Prefix
-export const BASE_API_TEST = 'https://gorest.co.in/public-api';
-export const BASE_API_URL = 'https://obscure-shore-42367.herokuapp.com/api';
+export const IS_NODE_PROD = process.env.node === 'production';
+export const IS_NODE_DEV = process.env.node === 'development';
+
+export const IS_DEV = REACT_APP_ENV === 'dev';
+export const IS_TEST = REACT_APP_ENV === 'test';
+export const IS_PROD = !IS_DEV && !IS_TEST;
+
+export const BASE_API_URL =
+  (IS_PROD && REACT_APP_BASE_API_URL) || (IS_DEV || IS_TEST ? REACT_APP_BASE_API_URL_TEST : '');
 
 export const COMPANY_NAME = 'YBizTech';
 export const ICON_FONT_URL = '//at.alicdn.com/t/font_2221049_8szkpgxzd38.js';

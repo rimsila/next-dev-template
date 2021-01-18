@@ -1,7 +1,8 @@
-import React from 'react';
+import { BASE_API_URL } from '@/constants';
 import { PageContainer } from '@ant-design/pro-layout';
-import { Card, Alert, Typography } from 'antd';
-import { useIntl, FormattedMessage } from 'umi';
+import { Alert, Card, Typography } from 'antd';
+import React from 'react';
+import { FormattedMessage, useIntl } from 'umi';
 import styles from './Welcome.less';
 
 const CodePreview: React.FC = ({ children }) => (
@@ -14,6 +15,8 @@ const CodePreview: React.FC = ({ children }) => (
 
 export default (): React.ReactNode => {
   const intl = useIntl();
+  console.log('BASE_API_URL', BASE_API_URL);
+
   return (
     <PageContainer>
       <Card>

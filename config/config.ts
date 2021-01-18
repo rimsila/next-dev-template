@@ -5,9 +5,14 @@ import defaultSettings from './defaultSettings';
 import proxy from './proxy';
 import routes from './routes';
 
-const { REACT_APP_ENV } = process.env;
+const { REACT_APP_ENV, REACT_APP_BASE_API_URL, REACT_APP_BASE_API_URL_PRE } = process.env;
 
 export default defineConfig({
+  define: {
+    REACT_APP_BASE_API_URL: REACT_APP_BASE_API_URL || '',
+    REACT_APP_BASE_API_URL_TEST: REACT_APP_BASE_API_URL_TEST || '',
+    REACT_APP_BASE_API_URL_PRE: REACT_APP_BASE_API_URL_PRE || '',
+  },
   hash: true,
   antd: {},
   layout: {

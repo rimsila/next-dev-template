@@ -1,4 +1,4 @@
-import { BASE_API_TEST, BASE_API_URL } from '@/constants';
+import { BASE_API_URL } from '@/constants';
 import type { IRequestOption } from '@next-core/nextRequest';
 import {
   addRequestInterceptor,
@@ -29,7 +29,7 @@ export async function nextRequest<TResult = any>(
    */
 
   configInstance({
-    baseURL: BASE_API_URL || BASE_API_TEST,
+    baseURL: BASE_API_URL,
     params: defaultParam,
   });
 
