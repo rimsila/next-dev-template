@@ -1,30 +1,26 @@
-﻿/**
+﻿import { IBestAFSRoute } from '@umijs/plugin-layout';
+import { ROUTE } from '../src/constants/routePath';
+
+/**
  * Permission definition
  */
 
-import { ROUTE } from '../src/constants/routePath';
-
 //example role crud
-export const Permissions = {
+export const permissions = {
   stockManagement: {
-    index: ROUTE.stockManagement.substring(1),
+    index: ROUTE.stockManagement.index.substring(1),
+    stockList: ROUTE.stockManagement.stockList.substring(1),
+    stockListSecond: ROUTE.stockManagement.stockListSecond.substring(1),
   },
-  template: {
-    dashboard: {
-      // index: 'template.dashboard',
-    },
-    sample: {
-      index: 'template.sample',
-      list: {
-        index: 'template.sample.list',
-        edit: 'template.sample.list.edit',
-        delete: 'template.sample.list.delete',
-      },
-    },
+  userManagement: {
+    index: ROUTE.userManagement.substring(1),
+  },
+  supplierManagement: {
+    index: ROUTE.supplierManagement.substring(1),
   },
 };
 
-export default [
+export const routes: IBestAFSRoute[] = [
   {
     path: '/auth',
     layout: false,
@@ -56,39 +52,46 @@ export default [
     ],
   },
   {
-    path: ROUTE.stockManagement,
+    path: ROUTE.stockManagement.index,
     name: 'Stock Management',
     icon: 'smile',
-    component: './Welcome',
+    access: permissions.stockManagement.index,
+    routes: [
+      {
+        name: 'stock List',
+        path: ROUTE.stockManagement.stockList,
+        component: './Welcome',
+        access: permissions.stockManagement.stockList,
+      },
+      {
+        name: 'stock List1',
+        path: ROUTE.stockManagement.stockListSecond,
+        component: './Welcome',
+        access: permissions.stockManagement.stockListSecond,
+      },
+      {
+        component: './404',
+      },
+    ],
   },
   {
     path: ROUTE.userManagement,
     name: 'User Management',
     icon: 'smile',
     component: './Welcome',
+    access: permissions.userManagement.index,
   },
   {
     path: ROUTE.supplierManagement,
     name: 'Supplier Management',
     icon: 'smile',
     component: './Welcome',
-  },
-  {
-    path: ROUTE.accountManagement,
-    name: 'Account Management',
-    icon: 'smile',
-    component: './Welcome',
-  },
-  {
-    path: ROUTE.reportManagement,
-    name: 'Report Management',
-    icon: 'smile',
-    component: './Welcome',
+    access: permissions.supplierManagement.index,
   },
 
   {
     path: ROUTE.home,
-    redirect: ROUTE.stockManagement,
+    redirect: ROUTE.stockManagement.stockList,
   },
   {
     component: './404',

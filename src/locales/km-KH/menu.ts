@@ -1,0 +1,26 @@
+export default {
+  'menu.welcome': 'សូមស្វាគមន៍',
+  'menu.more-block': 'ប្លុកច្រើនទៀត',
+  'menu.home': 'ផ្ទះ',
+  'menu.admin': 'ទំព័ររដ្ឋបាល',
+  'menu.admin.sub-page': 'ទំព័រគ្រប់គ្រងបន្ទាប់បន្សំ',
+  'menu.login': 'ចូល',
+  'menu.register': 'ចុះឈ្មោះ',
+  'menu.register.result': 'លទ្ធផលចុះឈ្មោះ',
+  'menu.dashboard': 'ផ្ទាំងគ្រប់គ្រង',
+  'menu.dashboard.analysis': 'ទំព័រវិភាគ',
+  'menu.dashboard.monitor': 'ទំព័រត្រួតពិនិត្យ',
+  'menu.dashboard.workplace': 'Workbench',
+  'menu.exception.403': '៤០៣',
+  'menu.exception.404': '៤០៤',
+  'menu.exception.500': '៥០០',
+  'menu.form': 'ទំព័រទម្រង់',
+  //* ----- ALL ROUTE ------
+
+  'menu.Stock Management': 'ការគ្រប់គ្រងឃ្លាំង',
+  'menu.User Management': 'ការគ្រប់គ្រងអ្នកប្រើប្រាស់',
+  'menu.Supplier Management': 'ការគ្រប់គ្រងក្រុមហ៊ុនផ្គត់ផ្គង',
+  'menu.Account Management': 'ការគ្រប់គ្រងផ្នែកគណនី',
+  'menu.Report Management': 'ការគ្រប់គ្រងរបាយការណ៍',
+  'menu.Forgot Password': 'Forgot Password',
+};

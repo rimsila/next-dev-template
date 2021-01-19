@@ -8,7 +8,7 @@ export default defineConfig({
   ],
   // https://github.com/zthxxx/react-dev-inspector#inspector-loader-props
   inspectorConfig: {
-    exclude: [],
+    exclude: [/node_modules/],
     babelPlugins: [],
     babelOptions: {},
   },

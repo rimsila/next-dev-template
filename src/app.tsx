@@ -7,6 +7,7 @@ import React from 'react';
 import type { RunTimeLayoutConfig } from 'umi';
 import { history } from 'umi';
 import defaultSettings from '../config/defaultSettings';
+import Error403 from './components/exception/403';
 import { ROUTE } from './constants/routePath';
 import { usersApi } from './services/users';
 import { getToken } from './utils/authority';
@@ -74,7 +75,7 @@ export const layout: RunTimeLayoutConfig = ({ initialState }) => {
     },
     menuHeaderRender: undefined,
     // Custom 403 page
-    unAccessible: <div>unAccessible</div>,
+    unAccessible: <Error403 />,
     ...initialState?.settings,
   };
 };

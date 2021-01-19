@@ -3,27 +3,32 @@ import { join } from 'path';
 import { defineConfig } from 'umi';
 import defaultSettings from './defaultSettings';
 import proxy from './proxy';
-import routes from './routes';
+import { routes } from './routes';
 
-const { REACT_APP_ENV, REACT_APP_BASE_API_URL, REACT_APP_BASE_API_URL_PRE } = process.env;
+const {
+  REACT_APP_ENV,
+  REACT_APP_BASE_API_URL,
+  REACT_APP_BASE_API_URL_PRE,
+  REACT_APP_BASE_API_URL_TEST,
+} = process.env;
 
 export default defineConfig({
   define: {
-    REACT_APP_BASE_API_URL: REACT_APP_BASE_API_URL || '',
-    REACT_APP_BASE_API_URL_TEST: REACT_APP_BASE_API_URL_TEST || '',
-    REACT_APP_BASE_API_URL_PRE: REACT_APP_BASE_API_URL_PRE || '',
+    REACT_APP_ENV,
+    REACT_APP_BASE_API_URL,
+    REACT_APP_BASE_API_URL_TEST,
+    REACT_APP_BASE_API_URL_PRE,
   },
   hash: true,
   antd: {},
   layout: {
     name: 'Sila Next Dev',
     locale: true,
-    siderWidth: 208,
+    siderWidth: 240,
     ...defaultSettings,
   },
   locale: {
-    // default zh-CN
-    default: 'zh-CN',
+    default: 'en-US',
     antd: true,
     // default true, when it is true, will use `navigator.language` overwrite default
     baseNavigator: true,

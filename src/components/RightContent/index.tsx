@@ -1,10 +1,11 @@
-import { Tag, Space, Menu } from 'antd';
 import { QuestionCircleOutlined } from '@ant-design/icons';
+import { Menu, Space, Tag } from 'antd';
 import React from 'react';
-import { useModel, SelectLang } from 'umi';
-import Avatar from './AvatarDropdown';
+import { useModel } from 'umi';
 import HeaderDropdown from '../HeaderDropdown';
 import HeaderSearch from '../HeaderSearch';
+import { SelectLang } from '../SelectLang';
+import Avatar from './AvatarDropdown';
 import styles from './index.less';
 
 export type SiderTheme = 'light' | 'dark';

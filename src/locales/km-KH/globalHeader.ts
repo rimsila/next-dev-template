@@ -1,0 +1,17 @@
+export default {
+  'component.globalHeader.search': 'ស្វែងរកគេហទំព័រ',
+  'component.globalHeader.search.example1': 'ស្វែងរកព័ត៌មានជំនួយមួយ',
+  'component.globalHeader.search.example2': 'ស្វែងរកព័ត៌មានជំនួយពីរ',
+  'component.globalHeader.search.example3': 'ស្វែងរកព័ត៌មានជំនួយបី',
+  'component.globalHeader.help': 'ប្រើឯកសារ',
+  'component.globalHeader.notification': 'សេចក្តីជូនដំណឹង',
+  'component.globalHeader.notification.empty': 'អ្នកបានមើលការជូនដំណឹងទាំងអស់',
+  'component.globalHeader.message': 'ព័ត៌មាន',
+  'component.globalHeader.message.empty': 'អ្នកបានអានសារទាំងអស់',
+  'component.globalHeader.event': 'ជិតមកដល់ហើយ',
+  'component.globalHeader.event.empty': 'អ្នកបានបញ្ចប់អ្វីទាំងអស់ដែលត្រូវធ្វើ',
+  'component.noticeIcon.clear': 'ទទេ',
+  'component.noticeIcon.cleared': 'ទទេ',
+  'component.noticeIcon.empty': 'គ្មាន​ទិន្នន័យ',
+  'component.noticeIcon.view-more': 'មើល​បន្ថែម​ទៀត',
+};

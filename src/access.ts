@@ -1,16 +1,19 @@
 // https://umijs.org/plugins/plugin-access
-import { Permissions } from '@config/routes';
+import { permissions } from '@config/routes';
 import type { IKeyValue } from '@next-core/core';
-import { ROUTE } from './constants/routePath';
 
 // export default (initialState: API.IUser) => {
 export default () => {
   // const { currentUser } = initialState || {};
-  const mockUserRole = [ROUTE.stockManagement.substring(1)];
+  const mockUserRole = [
+    permissions.stockManagement.index,
+    permissions.userManagement.index,
+    permissions.stockManagement.stockList,
+  ];
   const allPermissions = {
-    ...Permissions,
+    ...permissions,
   };
-  // return dgFlatPermissions(allPermissions, currentUser?.permissions);
+  // return dgFlatp(allPermissions, currentUser?.permissions);
   return dgFlatPermissions(allPermissions, mockUserRole);
 };
 

@@ -1,6 +1,5 @@
 import { httpCommon } from '@/constants/http';
 import { useRoute } from '@/hooks/useRoute';
-import { getToken } from '@next-dev/core/es/authority';
 import { Button, message, Result } from 'antd';
 import React, { useEffect } from 'react';
 import { useModel } from 'umi';
@@ -9,10 +8,10 @@ const NoFoundPage: React.FC = () => {
   const { initialState } = useModel('@@initialState');
   const { goHome } = useRoute();
   useEffect(() => {
-    if (!getToken()?.token && !initialState?.currentUser) {
-      goHome();
+    goHome();
+    setTimeout(() => {
       message.warn(httpCommon.protected, 3);
-    }
+    }, 500);
   }, [goHome, initialState?.currentUser]);
 
   return (
