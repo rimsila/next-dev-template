@@ -6,6 +6,9 @@ import { ROUTE } from '../src/constants/routePath';
 
 //example role crud
 export const Permissions = {
+  stockManagement: {
+    index: ROUTE.stockManagement.substring(1),
+  },
   template: {
     dashboard: {
       // index: 'template.dashboard',

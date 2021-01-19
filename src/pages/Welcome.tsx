@@ -1,4 +1,3 @@
-import { BASE_API_URL } from '@/constants';
 import { PageContainer } from '@ant-design/pro-layout';
 import { Alert, Card, Typography } from 'antd';
 import React from 'react';
@@ -15,7 +14,6 @@ const CodePreview: React.FC = ({ children }) => (
 
 export default (): React.ReactNode => {
   const intl = useIntl();
-  console.log('BASE_API_URL', BASE_API_URL);
 
   return (
     <PageContainer>
