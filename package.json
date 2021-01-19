@@ -6,6 +6,9 @@
   "scripts": {
     "analyze": "cross-env ANALYZE=1 umi build",
     "build": "umi build",
+    "de:test": "yarn build &&  yarn fixedSurge404 && surge --project ./dist --domain http://woebegone-stop.surge.sh ",
+    "fixedSurge404": "cp ./dist/index.html ./dist/200.html",
+    "fixedGhPage200": "cp ./dist/index.html ./dist/404.html",
     "deploy": "npm run site && npm run gh-pages",
     "dev": "npm run start:dev",
     "docker-hub:build": "docker build  -f Dockerfile.hub -t  ant-design-pro ./",
@@ -62,17 +65,15 @@
   ],
   "dependencies": {
     "@ant-design/icons": "^4.3.0",
-    "@ant-design/pro-descriptions": "^1.4.4",
-    "@ant-design/pro-form": "^1.13.7",
     "@ant-design/pro-layout": "^6.10.5",
-    "@ant-design/pro-table": "^2.22.2",
-    "@next-dev/component": "file:.yalc/@next-dev/component",
+    "@material-ui/core": "^4.11.2",
+    "@material-ui/icons": "^4.11.2",
     "@next-dev/core": "file:.yalc/@next-dev/core",
     "@next-dev/hooks": "file:.yalc/@next-dev/hooks",
     "@next-dev/provider": "file:.yalc/@next-dev/provider",
+    "@types/material-ui": "^0.21.8",
     "@umijs/route-utils": "^1.0.34",
     "ahooks": "^2.9.4",
-    "antd": "^4.10.1",
     "browser-image-compression": "^1.0.14",
     "classnames": "^2.2.6",
     "lodash": "^4.17.11",
@@ -82,6 +83,7 @@
     "react": "^16.6.0",
     "react-dom": "^16.6.0",
     "react-helmet-async": "^1.0.4",
+    "react-hook-form": "^6.14.2",
     "umi": "^3.3.4"
   },
   "devDependencies": {

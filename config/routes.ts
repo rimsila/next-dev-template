@@ -1,7 +1,7 @@
-﻿/**
+﻿import { IBestAFSRoute } from '@umijs/plugin-layout';
+/**
  * Permission definition
  */
-
 import { ROUTE } from '../src/constants/routePath';
 
 //example role crud
@@ -24,7 +24,13 @@ export const Permissions = {
   },
 };
 
-export default [
+export const routes: IBestAFSRoute[] = [
+  {
+    path: ROUTE.stockManagement,
+    name: 'Stock Management',
+    icon: 'smile',
+    component: './Welcome',
+  },
   {
     path: '/auth',
     layout: false,
@@ -32,16 +38,16 @@ export default [
       {
         path: '/auth',
         routes: [
-          {
-            name: 'register',
-            path: ROUTE.register,
-            component: './auth/register',
-          },
-          {
-            name: 'forgot-password',
-            path: '/auth/forgot-password',
-            component: './auth/forgotPassword',
-          },
+          // {
+          //   name: 'register',
+          //   path: ROUTE.register,
+          //   component: './auth/register',
+          // },
+          // {
+          //   name: 'forgot-password',
+          //   path: '/auth/forgot-password',
+          //   component: './auth/forgotPassword',
+          // },
 
           {
             name: 'login',
@@ -55,37 +61,6 @@ export default [
       },
     ],
   },
-  {
-    path: ROUTE.stockManagement,
-    name: 'Stock Management',
-    icon: 'smile',
-    component: './Welcome',
-  },
-  {
-    path: ROUTE.userManagement,
-    name: 'User Management',
-    icon: 'smile',
-    component: './Welcome',
-  },
-  {
-    path: ROUTE.supplierManagement,
-    name: 'Supplier Management',
-    icon: 'smile',
-    component: './Welcome',
-  },
-  {
-    path: ROUTE.accountManagement,
-    name: 'Account Management',
-    icon: 'smile',
-    component: './Welcome',
-  },
-  {
-    path: ROUTE.reportManagement,
-    name: 'Report Management',
-    icon: 'smile',
-    component: './Welcome',
-  },
-
   {
     path: ROUTE.home,
     redirect: ROUTE.stockManagement,

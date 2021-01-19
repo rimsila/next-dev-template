@@ -1,7 +1,7 @@
 import { codeHttpMsg } from '@/constants/http';
 import { ROUTE } from '@/constants/routePath';
 import type { IRequestOption } from '@next-dev/core/es/nextRequest';
-import { message, Modal } from 'antd';
+// import { message, Modal } from 'antd';
 import { history } from 'umi';
 import { clearToken } from './authority';
 
@@ -28,10 +28,10 @@ export const handlerGlobalErr = (configMsg: any) => {
   const showFullTipFunc = (newMsg?: string | undefined) => {
     const newMsgParam = newMsg || showFinalMsg;
     if ((fullTip && isErr) || errorTip || isErr) {
-      message.error(newMsgParam);
+      // message.error(newMsgParam);
     }
     if (fullTip && !isErr) {
-      message.success(newMsgParam);
+      // message.success(newMsgParam);
     }
   };
 

@@ -3,18 +3,23 @@ import { join } from 'path';
 import { defineConfig } from 'umi';
 import defaultSettings from './defaultSettings';
 import proxy from './proxy';
-import routes from './routes';
+import { routes } from './routes';
 
-const { REACT_APP_ENV, REACT_APP_BASE_API_URL, REACT_APP_BASE_API_URL_PRE } = process.env;
+const {
+  REACT_APP_ENV,
+  REACT_APP_BASE_API_URL,
+  REACT_APP_BASE_API_URL_PRE,
+  REACT_APP_BASE_API_URL_TEST,
+} = process.env;
 
 export default defineConfig({
   define: {
-    REACT_APP_BASE_API_URL: REACT_APP_BASE_API_URL || '',
-    REACT_APP_BASE_API_URL_TEST: REACT_APP_BASE_API_URL_TEST || '',
-    REACT_APP_BASE_API_URL_PRE: REACT_APP_BASE_API_URL_PRE || '',
+    REACT_APP_BASE_API_URL,
+    REACT_APP_BASE_API_URL_TEST,
+    REACT_APP_BASE_API_URL_PRE,
   },
   hash: true,
-  antd: {},
+  antd: false,
   layout: {
     name: 'Sila Next Dev',
     locale: true,
@@ -24,7 +29,7 @@ export default defineConfig({
   locale: {
     // default zh-CN
     default: 'zh-CN',
-    antd: true,
+    // antd: true,
     // default true, when it is true, will use `navigator.language` overwrite default
     baseNavigator: true,
   },
@@ -53,7 +58,7 @@ export default defineConfig({
     // '@modules': join(__dirname, './src/modules'),
     '@next-core': join(__dirname, '../node_modules/@next-dev/core/es'),
     '@next-hooks': join(__dirname, '../node_modules/@next-dev/hooks/es'),
-    '@next-component': join(__dirname, '../node_modules/@next-dev/component/es'),
+    // '@next-component': join(__dirname, '../node_modules/@next-dev/component/es'),
   },
   lessLoader: {
     javascriptEnabled: true,
