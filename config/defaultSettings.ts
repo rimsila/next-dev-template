@@ -6,15 +6,16 @@ const Settings: LayoutSettings & {
 } = {
   // Daybreak blue
   colorWeak: false,
-  title: 'Next Dev Template',
+  title: 'Next Dev',
   pwa: false,
   logo: 'https://gw.alipayobjects.com/zos/rmsportal/KDpgvguMpGfqaHPjicRK.svg',
   iconfontUrl: '',
   navTheme: 'dark',
   primaryColor: '#1890ff',
-  layout: 'mix',
+  layout: 'side',
   contentWidth: 'Fluid',
   fixedHeader: true,
+  headerTheme: 'light',
 };
 
 export default Settings;

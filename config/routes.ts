@@ -2,25 +2,74 @@
 import { ROUTE } from '../src/constants/routePath';
 
 /**
- * Permission definition
+ *
+ * @param path is pathname string
+ * merge access and path to get short code
  */
 
-//example role crud
-export const permissions = {
-  stockManagement: {
-    index: ROUTE.stockManagement.index.substring(1),
-    stockList: ROUTE.stockManagement.stockList.substring(1),
-    stockListSecond: ROUTE.stockManagement.stockListSecond.substring(1),
-  },
-  userManagement: {
-    index: ROUTE.userManagement.substring(1),
-  },
-  supplierManagement: {
-    index: ROUTE.supplierManagement.substring(1),
-  },
+const pathAccess = (path: string) => {
+  return { access: path, path };
 };
 
 export const routes: IBestAFSRoute[] = [
+  //* ----------- stockManagement --------------
+  {
+    ...pathAccess(ROUTE.stockManagement.index),
+    name: 'Stock Management',
+    icon: 'smile',
+    routes: [
+      {
+        ...pathAccess(ROUTE.stockManagement.stockList),
+        name: 'stock List',
+        component: './Welcome',
+      },
+      {
+        ...pathAccess(ROUTE.stockManagement.stockListSecond),
+        name: 'stock List1',
+        component: './Welcome',
+      },
+      {
+        component: './404',
+      },
+    ],
+  },
+
+  //* ----------- UserManagement --------------
+  {
+    name: 'User Management',
+    icon: 'smile',
+    component: './Welcome',
+    ...pathAccess(ROUTE.userManagement.index),
+  },
+
+  //* ----------- supplierManagement --------------
+  {
+    ...pathAccess(ROUTE.supplierManagement.index),
+    name: 'Supplier Management',
+    icon: 'smile',
+    component: './Welcome',
+  },
+
+  //* ----------- Settings --------------
+  {
+    path: ROUTE.settings.index,
+    name: 'Settings',
+    icon: 'smile',
+    access: ROUTE.settings.index,
+    routes: [
+      {
+        ...pathAccess(ROUTE.settings.role.index),
+        name: 'Roles Management',
+        component: './settings/role',
+      },
+
+      {
+        component: './404',
+      },
+    ],
+  },
+
+  //* ----------- @auth --------------
   {
     path: '/auth',
     layout: false,
@@ -30,7 +79,7 @@ export const routes: IBestAFSRoute[] = [
         routes: [
           {
             name: 'register',
-            path: ROUTE.register,
+            path: ROUTE.auth.register,
             component: './auth/register',
           },
           {
@@ -52,47 +101,10 @@ export const routes: IBestAFSRoute[] = [
     ],
   },
   {
-    path: ROUTE.stockManagement.index,
-    name: 'Stock Management',
-    icon: 'smile',
-    access: permissions.stockManagement.index,
-    routes: [
-      {
-        name: 'stock List',
-        path: ROUTE.stockManagement.stockList,
-        component: './Welcome',
-        access: permissions.stockManagement.stockList,
-      },
-      {
-        name: 'stock List1',
-        path: ROUTE.stockManagement.stockListSecond,
-        component: './Welcome',
-        access: permissions.stockManagement.stockListSecond,
-      },
-      {
-        component: './404',
-      },
-    ],
-  },
-  {
-    path: ROUTE.userManagement,
-    name: 'User Management',
-    icon: 'smile',
-    component: './Welcome',
-    access: permissions.userManagement.index,
-  },
-  {
-    path: ROUTE.supplierManagement,
-    name: 'Supplier Management',
-    icon: 'smile',
-    component: './Welcome',
-    access: permissions.supplierManagement.index,
-  },
-
-  {
     path: ROUTE.home,
     redirect: ROUTE.stockManagement.stockList,
   },
+
   {
     component: './404',
   },

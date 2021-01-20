@@ -1,17 +1,35 @@
 // https://umijs.org/plugins/plugin-access
-import { permissions } from '@config/routes';
-import type { IKeyValue } from '@next-core/core';
+import { PERMISSIONS } from '@/constants/routePath';
+import type { IKeyValue } from '@next-core/index';
 
 // export default (initialState: API.IUser) => {
-export default () => {
-  // const { currentUser } = initialState || {};
-  const mockUserRole = [
-    permissions.stockManagement.index,
-    permissions.userManagement.index,
-    permissions.stockManagement.stockList,
-  ];
+export default (initialState: { currentUser: API.IUser }) => {
+  const mockAdmin: any = () => localStorage?.getItem('role') || [];
+  const { currentUser } = initialState || {};
+  const { email } = currentUser?.data || {};
+  // const routeAccess = getMenuData(routes);
+
+  //* --- mockUserRole will be from server
+  let mockUserRole: any[] = [];
+
+  if (email === 'rimsila.itc@gmail.com') {
+    //* admin
+    mockUserRole = [
+      ...JSON?.parse(mockAdmin()),
+      PERMISSIONS?.settings?.role.index,
+      PERMISSIONS?.settings?.index,
+    ];
+  } else {
+    mockUserRole = [
+      PERMISSIONS?.stockManagement?.index,
+      PERMISSIONS?.userManagement?.index,
+      PERMISSIONS?.stockManagement?.stockList,
+    ];
+  }
+  console.log('mockUserRole', typeof mockAdmin());
+
   const allPermissions = {
-    ...permissions,
+    ...PERMISSIONS,
   };
   // return dgFlatp(allPermissions, currentUser?.permissions);
   return dgFlatPermissions(allPermissions, mockUserRole);

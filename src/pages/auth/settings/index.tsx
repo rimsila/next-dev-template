@@ -1,7 +1,7 @@
-import { UserInfo } from '@/components';
 import { PageContainer } from '@ant-design/pro-layout';
 import { Button } from 'antd';
 import React from 'react';
+import UserInfo from './userInfo';
 
 export default () => {
   return (

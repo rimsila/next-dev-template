@@ -31,7 +31,7 @@ const index: React.FC<indexProps> = memo(() => {
 
   return (
     <>
-      <NextLayout>
+      <NextLayout isEmptyLayout>
         {loadingResetPassword ? (
           <PageLoading />
         ) : (

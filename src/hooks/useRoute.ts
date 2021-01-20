@@ -8,9 +8,9 @@ export const useRoute = () => {
   const { redirect } = query as { redirect: string };
   const { initialState, setInitialState } = useModel('@@initialState');
 
-  const { push } = useHistory() || {};
+  const { push, goBack } = useHistory() || {};
 
-  const goLogin = () => push(ROUTE.login);
+  const goLogin = () => push(ROUTE.auth.login);
   const goHome = () => push(ROUTE.home);
 
   /**
@@ -28,9 +28,9 @@ export const useRoute = () => {
   const logoutRedirect = () => {
     setInitialState({ ...initialState, currentUser: undefined });
     clearToken();
-    if (pathname !== ROUTE.login && !redirect) {
+    if (pathname !== ROUTE.auth.login && !redirect) {
       history.replace({
-        pathname: ROUTE.login,
+        pathname: ROUTE.auth.login,
         search: stringify({
           redirect: pathname,
         }),
@@ -43,5 +43,6 @@ export const useRoute = () => {
     goHomeRedirect,
     goLogin,
     goHome,
+    goBack,
   };
 };

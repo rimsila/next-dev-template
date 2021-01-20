@@ -26,14 +26,14 @@ export async function getInitialState(): Promise<{
       const currentUser = await usersApi.getProfile();
       return currentUser;
     } catch (error) {
-      history.push(ROUTE.login);
+      history.push(ROUTE.auth.login);
       return undefined;
     }
   };
 
   // If it is a login page, do not execute
 
-  if (getToken()?.token && history.location.pathname !== ROUTE.login) {
+  if (getToken()?.token && history.location.pathname !== ROUTE.auth.login) {
     const currentUser = await fetchUserInfo();
     return {
       fetchUserInfo,
@@ -57,24 +57,24 @@ export const layout: RunTimeLayoutConfig = ({ initialState }) => {
       //* If not log in, redirect to login
       if (
         !getToken()?.token &&
-        history.location.pathname !== ROUTE.login &&
-        history.location.pathname !== ROUTE.register &&
-        history.location.pathname !== ROUTE.forgotPassword
+        history.location.pathname !== ROUTE.auth.login &&
+        history.location.pathname !== ROUTE.auth.register &&
+        history.location.pathname !== ROUTE.auth.forgotPassword
       ) {
-        history.push(ROUTE.login);
+        history.push(ROUTE.auth.login);
       }
       //* these page it protected after logged in,
       if (
         getToken()?.token &&
-        (history.location.pathname === ROUTE.login ||
-          history.location.pathname === ROUTE.register ||
-          history.location.pathname === ROUTE.forgotPassword)
+        (history.location.pathname === ROUTE.auth.login ||
+          history.location.pathname === ROUTE.auth.register ||
+          history.location.pathname === ROUTE.auth.forgotPassword)
       ) {
         history.push('/');
       }
     },
     menuHeaderRender: undefined,
-    // Custom 403 page
+    // Custom 403 page for unAccessible
     unAccessible: <Error403 />,
     ...initialState?.settings,
   };

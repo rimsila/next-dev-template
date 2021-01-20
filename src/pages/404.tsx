@@ -6,13 +6,13 @@ import { useModel } from 'umi';
 
 const NoFoundPage: React.FC = () => {
   const { initialState } = useModel('@@initialState');
-  const { goHome } = useRoute();
+  const { goBack, goHome } = useRoute();
   useEffect(() => {
-    goHome();
+    goBack();
     setTimeout(() => {
       message.warn(httpCommon.protected, 3);
     }, 500);
-  }, [goHome, initialState?.currentUser]);
+  }, [goBack, initialState?.currentUser]);
 
   return (
     <Result

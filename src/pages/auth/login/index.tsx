@@ -13,13 +13,13 @@ const LogIn: React.FC<logInProps> = memo(() => {
   }));
 
   return (
-    <NextLayout>
+    <NextLayout isEmptyLayout>
       <NextSignIn
         {...{
           onFinish: model.onSubmitLogin,
           next: {
-            forgotPassPath: ROUTE.forgotPassword,
-            registerPath: ROUTE.register,
+            forgotPassPath: ROUTE.auth.forgotPassword,
+            registerPath: ROUTE.auth.register,
             submitBtnProps: {
               loading: model.loadingLogin,
             },

@@ -46,9 +46,9 @@ export const handlerGlobalErr = (configMsg: any) => {
   //* ---------- invalid token ----------------
 
   if (invalidUser) {
-    if (history.location.pathname !== ROUTE.login) {
+    if (history.location.pathname !== ROUTE.auth.login) {
       clearToken();
-      history.replace(ROUTE.login);
+      history.replace(ROUTE.auth.login);
     }
     Modal.error({
       title: 'Incorrect user!',

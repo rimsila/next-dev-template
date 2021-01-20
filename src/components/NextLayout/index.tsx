@@ -1,3 +1,4 @@
+import type { ProCardProps } from '@ant-design/pro-card';
 import ProCard from '@ant-design/pro-card';
 import type { PageContainerProps } from '@ant-design/pro-layout';
 import { PageContainer } from '@ant-design/pro-layout';
@@ -8,16 +9,18 @@ import css from './index.less';
 type ILayout = {
   children?: ReactNode;
   contentInnerStyle?: CSSProperties;
+  cardProps?: ProCardProps;
+  isEmptyLayout?: boolean;
 } & PageContainerProps;
 
 export default (props: ILayout) => {
-  const { children, contentInnerStyle, ...rest } = props;
+  const { children, contentInnerStyle, cardProps, isEmptyLayout, ...rest } = props;
   return (
     <PageContainer
       {...{
-        className: css.next_layout,
-        title: false,
-        pageHeaderRender: false,
+        breadcrumb: undefined,
+        className: isEmptyLayout ? css.next_layout : '',
+        title: isEmptyLayout,
         ...rest,
       }}
     >
@@ -25,9 +28,10 @@ export default (props: ILayout) => {
         <ProCard
           layout="center"
           style={{
-            height: '100vh',
+            minHeight: '60vh',
             ...contentInnerStyle,
           }}
+          {...cardProps}
         >
           {children}
         </ProCard>

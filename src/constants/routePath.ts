@@ -1,28 +1,48 @@
-const stockManagement = '/stock-management';
-type IRoute = {
-  login?: any;
-  home?: any;
-  forgotPassword?: any;
-  register?: any;
-  userManagement?: any;
-  supplierManagement?: any;
-  stockManagement: {
-    index?: any;
-    stockList?: any;
-    stockListSecond?: any;
-  };
-};
+/**
+ * all @route will be use for path name, route and permission
+ */
 
-export const ROUTE: IRoute = {
-  login: '/auth/login',
+const stockManagement = '/stock-management';
+const settings = '/settings';
+const auth = '/auth';
+
+export const ROUTE = {
+  settings: {
+    index: settings,
+    role: {
+      index: `${settings}/role`,
+    },
+  },
+  auth: {
+    register: `${auth}/register`,
+    login: `${auth}/login`,
+    forgotPassword: `${auth}/forgot-password`,
+  },
+
   home: '/',
-  forgotPassword: '/auth/forgot-password',
-  register: '/auth/register',
-  userManagement: '/user-management',
-  supplierManagement: '/supplier-management',
+
+  userManagement: {
+    index: '/user-management',
+  },
+  supplierManagement: {
+    index: '/supplier-management',
+  },
   stockManagement: {
     index: stockManagement,
     stockList: `${stockManagement}/stock-list`,
     stockListSecond: `${stockManagement}/stock-list-second`,
   },
 };
+
+type INewRoute = Partial<typeof ROUTE>;
+const newRoute: INewRoute = { ...ROUTE };
+
+export const getPermissions = (exclude: boolean = true) => {
+  if (exclude) {
+    delete newRoute.home;
+    delete newRoute.auth;
+  }
+  return newRoute || {};
+};
+
+export const PERMISSIONS = getPermissions();

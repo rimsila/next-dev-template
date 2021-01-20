@@ -13,6 +13,7 @@ const {
 } = process.env;
 
 export default defineConfig({
+  //*---------- all env define here ---------
   define: {
     REACT_APP_ENV,
     REACT_APP_BASE_API_URL,
@@ -22,7 +23,7 @@ export default defineConfig({
   hash: true,
   antd: {},
   layout: {
-    name: 'Sila Next Dev',
+    name: 'Next Dev',
     locale: true,
     siderWidth: 240,
     ...defaultSettings,
@@ -41,7 +42,7 @@ export default defineConfig({
   },
   // umi routes: https://umijs.org/docs/routing
   routes,
-  // Theme for antd: https://ant.design/docs/react/customize-theme-cn
+  // Theme for antd: https://ant.design/docs/react/customize-theme
   theme: {
     'primary-color': defaultSettings.primaryColor,
   },
@@ -55,7 +56,7 @@ export default defineConfig({
   alias: {
     themes: join(__dirname, '../src/themes'),
     '@config': join(__dirname, '../config'),
-    // '@modules': join(__dirname, './src/modules'),
+    '@modules': join(__dirname, './src/modules'),
     '@next-core': join(__dirname, '../node_modules/@next-dev/core/es'),
     '@next-hooks': join(__dirname, '../node_modules/@next-dev/hooks/es'),
     '@next-component': join(__dirname, '../node_modules/@next-dev/component/es'),
