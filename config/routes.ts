@@ -14,18 +14,18 @@ const pathAccess = (path: string) => {
 export const routes: IBestAFSRoute[] = [
   //* ----------- stockManagement --------------
   {
-    ...pathAccess(ROUTE.stockManagement.index),
     name: 'Stock Management',
+    ...pathAccess(ROUTE.stockManagement.index),
     icon: 'smile',
     routes: [
       {
         ...pathAccess(ROUTE.stockManagement.stockList),
-        name: 'stock List',
+        name: 'Stock List',
         component: './Welcome',
       },
       {
         ...pathAccess(ROUTE.stockManagement.stockListSecond),
-        name: 'stock List1',
+        name: 'Stock List1',
         component: './Welcome',
       },
       {

@@ -3,35 +3,41 @@ import { useLocalStorageState } from 'ahooks/es';
 import { Form } from 'antd';
 import React from 'react';
 import { useModel } from 'umi';
-import { roles } from './data';
+import { roles } from './dataRole';
 
 export default () => {
   const { refresh } = useModel('@@initialState');
   const [form] = Form.useForm();
-  const [role, setRole] = useLocalStorageState<any[]>('role', roles);
+  const [role, setRole] = useLocalStorageState<any[]>('role', []);
 
-  // const handleSubmit = (values) => {
-  //   console.log(values);
-  //   setRole(values);
-  // };
+  const handleSubmit = (values) => {
+    console.log('submit values', values);
+  };
 
-  const onCheck = (checkedKeys: any) => {
-    console.log('onCheck', checkedKeys);
+  const onCheck = (
+    checkedKeys: string[],
+    info: { halfCheckedKeys: any[]; checkedNodes: any[] },
+  ) => {
+    const newRole = [...checkedKeys, ...info?.halfCheckedKeys];
+    console.log('info', info);
+
     form.setFieldsValue({
       roles: checkedKeys,
     });
-    setRole(checkedKeys);
+    handleSubmit(newRole);
+    setRole(newRole);
     refresh();
   };
-
   return (
     <TreeForm
       {...{
         onCheck,
         roles,
         fromProps: {
-          // onFinish: handleSubmit,
           form,
+          initialValues: {
+            roles: role,
+          },
         },
       }}
     />

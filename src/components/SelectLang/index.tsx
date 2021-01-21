@@ -47,7 +47,9 @@ export const SelectLang: React.FC<SelectLangProps> = (props) => {
   const { globalIconClassName, postLocalesData, onItemClick, style, reload, ...restProps } = props;
   const selectedLang = getLocale();
 
-  const changeLang = ({ key }: ClickParam): void => setLocale(key, reload);
+  const changeLang = ({ key }: ClickParam): void => {
+    return setLocale(key, reload);
+  };
 
   const defaultLangUConfig = getAllLocales().map(
     (key) =>

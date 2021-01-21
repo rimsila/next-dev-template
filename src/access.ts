@@ -4,7 +4,13 @@ import type { IKeyValue } from '@next-core/index';
 
 // export default (initialState: API.IUser) => {
 export default (initialState: { currentUser: API.IUser }) => {
-  const mockAdmin: any = () => localStorage?.getItem('role') || [];
+  const mockAdmin: any = () => {
+    const ls = localStorage?.getItem('role');
+    if (!ls) {
+      localStorage?.setItem('role', '[]');
+    }
+    return ls || [];
+  };
   const { currentUser } = initialState || {};
   const { email } = currentUser?.data || {};
   // const routeAccess = getMenuData(routes);
@@ -26,7 +32,6 @@ export default (initialState: { currentUser: API.IUser }) => {
       PERMISSIONS?.stockManagement?.stockList,
     ];
   }
-  console.log('mockUserRole', typeof mockAdmin());
 
   const allPermissions = {
     ...PERMISSIONS,

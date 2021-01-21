@@ -1,0 +1,34 @@
+{
+  "roles": [
+    {
+      "title": "admin",
+      "value": "admin",
+      "key": "admin",
+      "children": [
+        {
+          "title": "/supplier-management",
+          "value": "/supplier-management",
+          "key": "/supplier-management"
+        },
+        { "title": "/user-management", "value": "/user-management", "key": "/user-management" },
+        {
+          "title": "/stock-management",
+          "value": "/stock-management",
+          "key": "/stock-management",
+          "children": [
+            {
+              "title": "/stock-management/stock-list",
+              "value": "/stock-management/stock-list",
+              "key": "/stock-management/stock-list"
+            },
+            {
+              "title": "/stock-management/stock-list-second",
+              "value": "/stock-management/stock-list-second",
+              "key": "/stock-management/stock-list-second"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

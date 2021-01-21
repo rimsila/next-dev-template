@@ -2,7 +2,9 @@ import Footer from '@/components/Footer';
 import RightContent from '@/components/RightContent';
 import type { Settings as LayoutSettings } from '@ant-design/pro-layout';
 import { PageLoading } from '@ant-design/pro-layout';
+import validateMessages from '@next-core/validation';
 import '@next-dev/component/es/style/index.less';
+import { ConfigProvider } from 'antd';
 import React from 'react';
 import type { RunTimeLayoutConfig } from 'umi';
 import { history } from 'umi';
@@ -15,6 +17,12 @@ import { getToken } from './utils/authority';
 export const initialStateConfig = {
   loading: <PageLoading />,
 };
+
+(function init() {})();
+
+export function render(oldRender) {
+  oldRender();
+}
 
 export async function getInitialState(): Promise<{
   settings?: LayoutSettings;
@@ -46,6 +54,24 @@ export async function getInitialState(): Promise<{
     fetchUserInfo,
     settings: defaultSettings,
   };
+}
+
+const ApolloProviderRoot = (props: any) => {
+  const { routes } = props;
+  return React.createElement(ConfigProvider, {
+    form: { validateMessages },
+    input: {
+      autoComplete: 'off',
+    },
+    children: React.cloneElement(props.children, {
+      ...props.children.props,
+      routes,
+    }),
+  });
+};
+
+export function rootContainer(container: any) {
+  return React.createElement(ApolloProviderRoot, {}, container);
 }
 
 export const layout: RunTimeLayoutConfig = ({ initialState }) => {

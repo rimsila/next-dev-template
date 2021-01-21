@@ -29,7 +29,7 @@ export default defineConfig({
     ...defaultSettings,
   },
   locale: {
-    default: 'en-US',
+    // default: 'en-US',
     antd: true,
     // default true, when it is true, will use `navigator.language` overwrite default
     baseNavigator: true,
@@ -56,7 +56,7 @@ export default defineConfig({
   alias: {
     themes: join(__dirname, '../src/themes'),
     '@config': join(__dirname, '../config'),
-    '@modules': join(__dirname, './src/modules'),
+    // '@modules': join(__dirname, './src/modules'),
     '@next-core': join(__dirname, '../node_modules/@next-dev/core/es'),
     '@next-hooks': join(__dirname, '../node_modules/@next-dev/hooks/es'),
     '@next-component': join(__dirname, '../node_modules/@next-dev/component/es'),

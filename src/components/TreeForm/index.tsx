@@ -4,7 +4,7 @@ import type { FormProps } from 'antd/lib/form';
 import React from 'react';
 
 type IProps = {
-  onCheck?: (param?: any) => void;
+  onCheck?: (checkedKeys?: any, info?: any) => void;
   roles: any[];
   fromProps?: FormProps;
 };
@@ -16,7 +16,7 @@ export default (props: IProps) => {
       <Row>
         <Col span={24}>
           <Form.Item label="Roles" {...LAYOUT_FORM_SINGLE} valuePropName="checkedKeys" name="roles">
-            <Tree treeData={roles} onCheck={onCheck} checkable height={200} defaultExpandAll />
+            <Tree treeData={roles} onCheck={onCheck} checkable height={300} defaultExpandAll />
           </Form.Item>
         </Col>
       </Row>
