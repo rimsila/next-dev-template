@@ -14,9 +14,9 @@ export const roles = [
     ...mergeValues({
       v: 'admin',
       children: [
+        mergeValues({ v: ROUTE.dashboard.index }),
         mergeValues({ v: ROUTE.supplierManagement.index }),
         mergeValues({ v: ROUTE.userManagement.index }),
-
         mergeValues({
           v: ROUTE.stockManagement.index,
           children: [

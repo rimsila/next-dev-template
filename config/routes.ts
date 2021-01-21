@@ -4,27 +4,42 @@ import { ROUTE } from '../src/constants/routePath';
 /**
  *
  * @param path is pathname string
- * merge access and path to get short code
+ * merge access ,component and path has the same path to get short code
  */
+type IPathAccess = {
+  path: string;
+  isCom?: boolean;
+  isName?: boolean;
+  subStringName?: number;
+};
 
-const pathAccess = (path: string) => {
-  return { access: path, path };
+const pathAccess = (params: IPathAccess) => {
+  const { path, isCom, isName, subStringName = 1 } = params || {};
+  const component = isCom ? { component: `.${path}` } : {};
+  const name = isName ? { name: path.substring(subStringName) } : {};
+  return { access: path, path, ...component, ...name };
 };
 
 export const routes: IBestAFSRoute[] = [
-  //* ----------- stockManagement --------------
+  //* ----------- dashboard --------------
   {
-    name: 'Stock Management',
-    ...pathAccess(ROUTE.stockManagement.index),
+    ...pathAccess({ path: ROUTE.dashboard.index, isCom: true, isName: true }),
     icon: 'smile',
+  },
+  //* ----------- UserManagement --------------
+  {
+    name: 'User Management',
+    icon: 'smile',
+    component: './Welcome',
+    ...pathAccess({ path: ROUTE.userManagement.index }),
     routes: [
       {
-        ...pathAccess(ROUTE.stockManagement.stockList),
+        ...pathAccess({ path: ROUTE.stockManagement.stockList }),
         name: 'Stock List',
         component: './Welcome',
       },
       {
-        ...pathAccess(ROUTE.stockManagement.stockListSecond),
+        ...pathAccess({ path: ROUTE.stockManagement.stockListSecond }),
         name: 'Stock List1',
         component: './Welcome',
       },
@@ -34,17 +49,31 @@ export const routes: IBestAFSRoute[] = [
     ],
   },
 
-  //* ----------- UserManagement --------------
+  //* ----------- stockManagement --------------
   {
-    name: 'User Management',
+    name: 'Stock Management',
+    ...pathAccess({ path: ROUTE.stockManagement.index }),
     icon: 'smile',
-    component: './Welcome',
-    ...pathAccess(ROUTE.userManagement.index),
+    routes: [
+      {
+        ...pathAccess({ path: ROUTE.stockManagement.stockList }),
+        name: 'Stock List',
+        component: './Welcome',
+      },
+      {
+        ...pathAccess({ path: ROUTE.stockManagement.stockListSecond }),
+        name: 'Stock List1',
+        component: './Welcome',
+      },
+      {
+        component: './404',
+      },
+    ],
   },
 
   //* ----------- supplierManagement --------------
   {
-    ...pathAccess(ROUTE.supplierManagement.index),
+    ...pathAccess({ path: ROUTE.supplierManagement.index }),
     name: 'Supplier Management',
     icon: 'smile',
     component: './Welcome',
@@ -58,7 +87,7 @@ export const routes: IBestAFSRoute[] = [
     access: ROUTE.settings.index,
     routes: [
       {
-        ...pathAccess(ROUTE.settings.role.index),
+        ...pathAccess({ path: ROUTE.settings.role.index }),
         name: 'Roles Management',
         component: './settings/role',
       },

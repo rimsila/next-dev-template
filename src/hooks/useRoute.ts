@@ -19,7 +19,8 @@ export const useRoute = () => {
   const goHomeRedirect = () => {
     if (!history) return;
     setTimeout(() => {
-      history.push(redirect || ROUTE.home);
+      history.push(ROUTE.home);
+      // history.push(redirect || ROUTE.home);
     }, 10);
   };
   /**

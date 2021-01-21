@@ -5,8 +5,12 @@
 const stockManagement = '/stock-management';
 const settings = '/settings';
 const auth = '/auth';
+const dashboard = '/dashboard';
 
 export const ROUTE = {
+  dashboard: {
+    index: dashboard,
+  },
   settings: {
     index: settings,
     role: {

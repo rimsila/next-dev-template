@@ -37,12 +37,13 @@ export default (initialState: { currentUser: API.IUser }) => {
     ...PERMISSIONS,
   };
   // return dgFlatp(allPermissions, currentUser?.permissions);
-  return dgFlatPermissions(allPermissions, mockUserRole);
+  return dgFlatPermissions(allPermissions, mockUserRole, email);
 };
 
 function dgFlatPermissions(
   allPermissions: IKeyValue,
   curPermissions: string[] = [],
+  email: any,
 ): IKeyValue<boolean> {
   let result: IKeyValue<boolean> = {};
   // eslint-disable-next-line no-restricted-syntax
@@ -51,7 +52,7 @@ function dgFlatPermissions(
       if (typeof allPermissions[key] === 'string') {
         result[allPermissions[key]] = curPermissions.indexOf(allPermissions[key]) !== -1;
       } else {
-        const subResult = dgFlatPermissions(allPermissions[key], curPermissions);
+        const subResult = dgFlatPermissions(allPermissions[key], curPermissions, email);
         result = {
           ...result,
           ...subResult,
@@ -59,7 +60,6 @@ function dgFlatPermissions(
       }
     }
   }
-  console.log('result', result);
-
-  return result;
+  // @ts-ignore
+  return email ? true : result;
 }
