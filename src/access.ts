@@ -9,7 +9,7 @@ export default (initialState: { currentUser: API.IUser }) => {
     if (!ls) {
       localStorage?.setItem('role', '[]');
     }
-    return ls || [];
+    return (ls && JSON?.parse(ls)) || [];
   };
   const { currentUser } = initialState || {};
   const { email } = currentUser?.data || {};
@@ -21,7 +21,7 @@ export default (initialState: { currentUser: API.IUser }) => {
   if (email === 'rimsila.itc@gmail.com') {
     //* admin
     mockUserRole = [
-      ...JSON?.parse(mockAdmin()),
+      ...mockAdmin(),
       PERMISSIONS?.settings?.role.index,
       PERMISSIONS?.settings?.index,
     ];

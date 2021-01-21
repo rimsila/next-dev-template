@@ -73,6 +73,7 @@
     "@umijs/route-utils": "^1.0.34",
     "ahooks": "^2.9.4",
     "antd": "^4.10.1",
+    "antd-img-crop": "^3.13.2",
     "browser-image-compression": "^1.0.14",
     "classnames": "^2.2.6",
     "lodash": "^4.17.11",
