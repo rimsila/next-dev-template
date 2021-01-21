@@ -2,7 +2,6 @@
 import { join } from 'path';
 import { defineConfig } from 'umi';
 import defaultSettings from './defaultSettings';
-import proxy from './proxy';
 import { routes } from './routes';
 
 const {
@@ -49,7 +48,7 @@ export default defineConfig({
   esbuild: {},
   title: false,
   ignoreMomentLocale: true,
-  proxy: proxy[REACT_APP_ENV || 'dev'],
+  // proxy: proxy[REACT_APP_ENV || 'dev'],
   manifest: {
     basePath: '/',
   },
