@@ -1,7 +1,7 @@
 export default {
   'menu.Stock Management.Stock List': 'Management Stock',
   'menu.Stock Management.Stock List1': 'Management Stock1',
-  'menu.Stock Management': 'Welcome',
+  'menu.Stock Management': 'Stock Management',
   'menu.Settings.Roles Management': 'Roles Management',
   'menu.welcome': 'Welcome',
   'menu.more-blocks': 'More Blocks',
