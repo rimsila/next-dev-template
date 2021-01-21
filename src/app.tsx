@@ -56,7 +56,7 @@ export async function getInitialState(): Promise<{
   };
 }
 
-const ApolloProviderRoot = (props: any) => {
+const appRoot = (props: any) => {
   const { routes } = props;
   return React.createElement(ConfigProvider, {
     form: { validateMessages },
@@ -71,7 +71,7 @@ const ApolloProviderRoot = (props: any) => {
 };
 
 export function rootContainer(container: any) {
-  return React.createElement(ApolloProviderRoot, {}, container);
+  return React.createElement(appRoot, {}, container);
 }
 
 export const layout: RunTimeLayoutConfig = ({ initialState }) => {
