@@ -1,75 +1,82 @@
-﻿import { IBestAFSRoute } from '@umijs/plugin-layout';
-import { ROUTE } from '../src/constants/routePath';
+﻿//* can't alias import here
 
+import { IBestAFSRoute } from '@umijs/plugin-layout';
+import { ROUTE } from '../src/constants/routePath';
+import { getLastUrl, toCapitalize } from '../src/utils/stringRegex';
+
+type IPathAccess = {
+  path: string;
+  isCom?: boolean;
+  isName?: boolean;
+  isCommon?: boolean;
+  isMain?: boolean;
+  isMainCom?: boolean;
+  icon?: string;
+  is404?: boolean;
+  routes?: any[];
+};
 /**
  *
  * @param path is pathname string
  * merge access ,component and path has the same path to get short code
  */
-type IPathAccess = {
-  path: string;
-  isCom?: boolean;
-  isName?: boolean;
-  subStringName?: number;
-  routes?: any[];
-};
-
 const pathAccess = (params: IPathAccess) => {
-  const { path, isCom, isName, subStringName = 1, routes = [] } = params || {};
-  const component = isCom ? { component: `.${path}` } : {};
-  const name = isName ? { name: path.substring(subStringName) } : {};
-  const newRoutes = { routes: routes?.length > 0 ? [...routes] : [] };
+  let { path, isMain, isMainCom, isCommon = true, isCom, isName, icon, is404, routes = [] } =
+    params || {};
 
-  return { access: path, path, ...component, ...name, ...newRoutes?.routes };
+  //* isCommon all are include
+  if (isCommon || isMain || isMainCom) {
+    isCom = isMain || isMainCom ? false : true;
+    isName = true;
+    is404 = isMainCom;
+  }
+
+  const getName = { name: toCapitalize(getLastUrl(path).lastUrlName) };
+
+  const com404 = is404 ? { component: './404' } : {};
+  const component = isCom ? { component: `.${path}` } : {};
+  const name = isName ? getName : {};
+  const neRoutes = routes.length > 0 ? { routes } : {};
+
+  return {
+    access: path,
+    path,
+    icon: icon || 'smile',
+    ...component,
+    ...name,
+    ...com404,
+    ...neRoutes,
+  };
 };
 
 export const routes: IBestAFSRoute[] = [
   //* ----------- dashboard --------------
-  {
-    ...pathAccess({ path: ROUTE.dashboard.index, isCom: true, isName: true }),
-    icon: 'smile',
-  },
+  pathAccess({ path: ROUTE.dashboard.index }),
+
   //* ----------- UserManagement --------------
   {
-    name: 'User Management',
-    icon: 'smile',
-    ...pathAccess({ path: ROUTE.userManagement.index }),
-    routes: [
-      {
-        name: 'User',
-        ...pathAccess({ path: ROUTE.userManagement.user.index, isCom: true }),
-      },
-      {
-        ...pathAccess({ path: ROUTE.userManagement.permission, isCom: true }),
-        name: 'Permission',
-      },
-      {
-        component: './404',
-      },
-    ],
+    ...pathAccess({
+      path: ROUTE.userManagement.index,
+      isMain: true,
+      routes: [
+        pathAccess({ path: ROUTE.userManagement.user.index }),
+        pathAccess({ path: ROUTE.userManagement.permission }),
+      ],
+    }),
   },
   //* ----------- supplierManagement --------------
   {
-    ...pathAccess({ path: ROUTE.supplierManagement.index }),
-    name: 'Supplier Management',
-    icon: 'smile',
+    ...pathAccess({ path: ROUTE.supplierManagement.index, isMain: true }),
+
     routes: [
       {
-        ...pathAccess({ path: ROUTE.supplierManagement.company.index, isCom: true }),
+        ...pathAccess({ path: ROUTE.supplierManagement.company.index }),
         name: 'company',
       },
       {
         ...pathAccess({
           path: ROUTE.supplierManagement.supplier.index,
           isCom: true,
-          routes: [
-            {
-              ...pathAccess({ path: ROUTE.saleManagement.live.readLive.index, isName: true }),
-            },
-            {
-              ...pathAccess({ path: ROUTE.saleManagement.live.readComment.index, isName: true }),
-            },
-          ],
         }),
         name: 'supplier',
       },
@@ -77,135 +84,57 @@ export const routes: IBestAFSRoute[] = [
   },
   //* ----------- productManagement --------------
   {
-    ...pathAccess({ path: ROUTE.productManagement.index }),
-    name: 'product Management',
-    icon: 'smile',
+    ...pathAccess({ path: ROUTE.productManagement.index, isMain: true }),
     routes: [
-      {
-        ...pathAccess({ path: ROUTE.productManagement.product.index, isCom: true }),
-        name: 'product',
-      },
-      {
-        ...pathAccess({ path: ROUTE.productManagement.category.index, isCom: true }),
-        name: 'category',
-      },
+      pathAccess({ path: ROUTE.productManagement.product.index }),
+      pathAccess({ path: ROUTE.productManagement.category.index }),
     ],
   },
   //* ----------- accountManagement --------------
-  {
-    ...pathAccess({ path: ROUTE.accountManagement.index }),
-    name: 'account Management',
-    icon: 'smile',
-  },
+
+  pathAccess({ path: ROUTE.accountManagement.index, isMain: true }),
 
   //* ----------- reportManagement --------------
   {
-    ...pathAccess({ path: ROUTE.reportManagement.index }),
-    name: 'report Management',
-    icon: 'smile',
+    ...pathAccess({ path: ROUTE.reportManagement.index, isMain: true }),
   },
 
   //* ----------- hrManagement --------------
   {
-    ...pathAccess({ path: ROUTE.hrManagement.index }),
-    name: 'hr Management',
-    icon: 'smile',
+    ...pathAccess({ path: ROUTE.hrManagement.index, isMain: true }),
   },
-  // //* ----------- stockManagement --------------
-  // {
-  //   name: 'Stock Management',
-  //   ...pathAccess({ path: ROUTE.stockManagement.index }),
-  //   icon: 'smile',
-  //   routes: [
-  //     {
-  //       ...pathAccess({ path: ROUTE.stockManagement.stockList }),
-  //       name: 'Stock List',
-  //       component: './Welcome',
-  //     },
-  //     {
-  //       ...pathAccess({ path: ROUTE.stockManagement.stockListSecond }),
-  //       name: 'Stock List1',
-  //       component: './Welcome',
-  //     },
-  //     {
-  //       component: './404',
-  //     },
-  //   ],
-  // },
   //* ----------- Sale Management  --------------
   {
-    path: ROUTE.saleManagement.index,
-    name: 'Sale Management',
-    icon: 'smile',
-    access: ROUTE.saleManagement.index,
+    ...pathAccess({ path: ROUTE.saleManagement.index, isMain: true }),
     routes: [
+      pathAccess({ path: ROUTE.saleManagement.pos.index, isMain: true }),
       {
-        name: 'POS Management',
-        ...pathAccess({ path: ROUTE.saleManagement.pos.index }),
-      },
-      {
-        name: 'Live Management',
         ...pathAccess({
           path: ROUTE.saleManagement.live.index,
+          isMain: true,
         }),
         routes: [
-          {
-            ...pathAccess({
-              path: ROUTE.saleManagement.live.readLive.index,
-              isCom: true,
-            }),
-            name: 'readLive',
-          },
-          {
-            ...pathAccess({ path: ROUTE.saleManagement.live.readComment.index }),
-            name: 'readComment',
-          },
-          {
-            ...pathAccess({ path: ROUTE.saleManagement.live.printInvoice.index }),
-            name: 'printInvoice',
-          },
-          {
-            ...pathAccess({ path: ROUTE.saleManagement.live.report.index }),
-            name: 'report',
-          },
-          {
-            ...pathAccess({ path: ROUTE.saleManagement.live.setting.index }),
-            name: 'setting',
-          },
+          pathAccess({
+            path: ROUTE.saleManagement.live.readLive.index,
+            isCom: true,
+          }),
+          pathAccess({ path: ROUTE.saleManagement.live.readComment.index }),
+          pathAccess({ path: ROUTE.saleManagement.live.printInvoice.index }),
+          pathAccess({ path: ROUTE.saleManagement.live.report.index }),
+          pathAccess({ path: ROUTE.saleManagement.live.setting.index }),
         ],
-      },
-
-      {
-        component: './404',
       },
     ],
   },
   //* ----------- Settings --------------
   {
-    path: ROUTE.setting.index,
-    name: 'Settings',
-    icon: 'smile',
-    access: ROUTE.setting.index,
+    ...pathAccess({ path: ROUTE.setting.index, isMain: true }),
     routes: [
-      {
-        ...pathAccess({ path: ROUTE.setting.country.index, isCom: true, isName: true }),
-      },
-      {
-        ...pathAccess({ path: ROUTE.setting.province.index, isCom: true, isName: true }),
-      },
-      {
-        ...pathAccess({ path: ROUTE.setting.district.index, isCom: true, isName: true }),
-      },
-      {
-        ...pathAccess({ path: ROUTE.setting.commune.index, isCom: true, isName: true }),
-      },
-      {
-        ...pathAccess({ path: ROUTE.setting.village.index, isCom: true, isName: true }),
-      },
-
-      {
-        component: './404',
-      },
+      pathAccess({ path: ROUTE.setting.country.index }),
+      pathAccess({ path: ROUTE.setting.province.index }),
+      pathAccess({ path: ROUTE.setting.district.index }),
+      pathAccess({ path: ROUTE.setting.commune.index }),
+      pathAccess({ path: ROUTE.setting.village.index }),
     ],
   },
 
@@ -242,7 +171,7 @@ export const routes: IBestAFSRoute[] = [
   },
   {
     path: ROUTE.home,
-    redirect: ROUTE.stockManagement.stockList,
+    redirect: ROUTE.dashboard.index,
   },
 
   {
