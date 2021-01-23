@@ -74,10 +74,11 @@ export function rootContainer(container: any) {
   return React.createElement(appRoot, {}, container);
 }
 
-export const layout: RunTimeLayoutConfig = ({ initialState }) => {
+export const layout: RunTimeLayoutConfig = ({ initialState, loading }) => {
   return {
     rightContentRender: () => <RightContent />,
     disableContentMargin: true,
+    loading,
     footerRender: () => <Footer />,
     onPageChange: () => {
       //* If not log in, redirect to login

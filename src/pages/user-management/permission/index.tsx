@@ -1,14 +1,18 @@
-import { httpCommon } from '@/constants/http';
-import { Button, Result } from 'antd';
+import NextLayout from '@/components/NextLayout';
+import Roles from '@/containers/settings/roles';
 import React from 'react';
 
 export default () => {
   return (
-    <Result
-      status="404"
-      title="404"
-      subTitle={httpCommon.page404}
-      extra={<Button type="primary">hello permission page</Button>}
-    />
+    <NextLayout
+      {...{
+        contentInnerStyle: {},
+        cardProps: {
+          layout: 'default',
+        },
+      }}
+    >
+      <Roles />
+    </NextLayout>
   );
 };

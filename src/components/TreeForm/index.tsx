@@ -16,7 +16,7 @@ export default (props: IProps) => {
       <Row>
         <Col span={24}>
           <Form.Item label="Roles" {...LAYOUT_FORM_SINGLE} valuePropName="checkedKeys" name="roles">
-            <Tree treeData={roles} onCheck={onCheck} checkable height={300} defaultExpandAll />
+            <Tree treeData={roles} onCheck={onCheck} checkable height={300} />
           </Form.Item>
         </Col>
       </Row>

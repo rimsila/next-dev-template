@@ -2,52 +2,7 @@
 
 import { IBestAFSRoute } from '@umijs/plugin-layout';
 import { ROUTE } from '../src/constants/routePath';
-import { getLastUrl, toCapitalize } from '../src/utils/stringRegex';
-
-type IPathAccess = {
-  path: string;
-  isCom?: boolean;
-  isName?: boolean;
-  isCommon?: boolean;
-  isMain?: boolean;
-  isMainCom?: boolean;
-  icon?: string;
-  is404?: boolean;
-  routes?: any[];
-};
-/**
- *
- * @param path is pathname string
- * merge access ,component and path has the same path to get short code
- */
-const pathAccess = (params: IPathAccess) => {
-  let { path, isMain, isMainCom, isCommon = true, isCom, isName, icon, is404, routes = [] } =
-    params || {};
-
-  //* isCommon all are include
-  if (isCommon || isMain || isMainCom) {
-    isCom = isMain || isMainCom ? false : true;
-    isName = true;
-    is404 = isMainCom;
-  }
-
-  const getName = { name: toCapitalize(getLastUrl(path).lastUrlName) };
-
-  const com404 = is404 ? { component: './404' } : {};
-  const component = isCom ? { component: `.${path}` } : {};
-  const name = isName ? getName : {};
-  const neRoutes = routes.length > 0 ? { routes } : {};
-
-  return {
-    access: path,
-    path,
-    icon: icon || 'smile',
-    ...component,
-    ...name,
-    ...com404,
-    ...neRoutes,
-  };
-};
+import { pathAccess } from '../src/utils';
 
 export const routes: IBestAFSRoute[] = [
   //* ----------- dashboard --------------
@@ -66,21 +21,19 @@ export const routes: IBestAFSRoute[] = [
   },
   //* ----------- supplierManagement --------------
   {
-    ...pathAccess({ path: ROUTE.supplierManagement.index, isMain: true }),
+    ...pathAccess({
+      path: ROUTE.supplierManagement.index,
+      isMain: true,
+      routes: [
+        {
+          ...pathAccess({ path: ROUTE.supplierManagement.company.index }),
+        },
 
-    routes: [
-      {
-        ...pathAccess({ path: ROUTE.supplierManagement.company.index }),
-        name: 'company',
-      },
-      {
-        ...pathAccess({
+        pathAccess({
           path: ROUTE.supplierManagement.supplier.index,
-          isCom: true,
         }),
-        name: 'supplier',
-      },
-    ],
+      ],
+    }),
   },
   //* ----------- productManagement --------------
   {
@@ -92,22 +45,23 @@ export const routes: IBestAFSRoute[] = [
   },
   //* ----------- accountManagement --------------
 
-  pathAccess({ path: ROUTE.accountManagement.index, isMain: true }),
+  pathAccess({ path: ROUTE.accountManagement.index }),
 
   //* ----------- reportManagement --------------
   {
-    ...pathAccess({ path: ROUTE.reportManagement.index, isMain: true }),
+    ...pathAccess({ path: ROUTE.reportManagement.index }),
   },
 
   //* ----------- hrManagement --------------
   {
-    ...pathAccess({ path: ROUTE.hrManagement.index, isMain: true }),
+    ...pathAccess({ path: ROUTE.hrManagement.index }),
   },
+
   //* ----------- Sale Management  --------------
   {
     ...pathAccess({ path: ROUTE.saleManagement.index, isMain: true }),
     routes: [
-      pathAccess({ path: ROUTE.saleManagement.pos.index, isMain: true }),
+      pathAccess({ path: ROUTE.saleManagement.pos.index }),
       {
         ...pathAccess({
           path: ROUTE.saleManagement.live.index,
@@ -116,7 +70,6 @@ export const routes: IBestAFSRoute[] = [
         routes: [
           pathAccess({
             path: ROUTE.saleManagement.live.readLive.index,
-            isCom: true,
           }),
           pathAccess({ path: ROUTE.saleManagement.live.readComment.index }),
           pathAccess({ path: ROUTE.saleManagement.live.printInvoice.index }),
@@ -128,52 +81,41 @@ export const routes: IBestAFSRoute[] = [
   },
   //* ----------- Settings --------------
   {
-    ...pathAccess({ path: ROUTE.setting.index, isMain: true }),
-    routes: [
-      pathAccess({ path: ROUTE.setting.country.index }),
-      pathAccess({ path: ROUTE.setting.province.index }),
-      pathAccess({ path: ROUTE.setting.district.index }),
-      pathAccess({ path: ROUTE.setting.commune.index }),
-      pathAccess({ path: ROUTE.setting.village.index }),
-    ],
+    ...pathAccess({
+      path: ROUTE.setting.index,
+      isMain: true,
+      routes: [
+        pathAccess({ path: ROUTE.setting.country.index }),
+        pathAccess({ path: ROUTE.setting.province.index }),
+        pathAccess({ path: ROUTE.setting.district.index }),
+        pathAccess({ path: ROUTE.setting.commune.index }),
+        pathAccess({ path: ROUTE.setting.village.index }),
+      ],
+    }),
   },
 
   //* ----------- @auth --------------
   {
-    path: '/auth',
-    layout: false,
-    routes: [
-      {
-        path: '/auth',
-        routes: [
-          {
-            name: 'register',
-            path: ROUTE.auth.register,
-            component: './auth/register',
-          },
-          {
-            name: 'forgot-password',
-            path: '/auth/forgot-password',
-            component: './auth/forgotPassword',
-          },
-
-          {
-            name: 'login',
-            path: '/auth/login',
-            component: './auth/login',
-          },
-          {
-            component: './404',
-          },
-        ],
-      },
-    ],
+    ...pathAccess({
+      path: ROUTE.auth.index,
+      layout: false,
+      isCommon: false,
+      routes: [
+        {
+          path: ROUTE.auth.index,
+          routes: [
+            pathAccess({ path: ROUTE.auth.register }),
+            pathAccess({ path: ROUTE.auth.forgotPassword }),
+            pathAccess({ path: ROUTE.auth.login }),
+          ],
+        },
+      ],
+    }),
   },
   {
     path: ROUTE.home,
     redirect: ROUTE.dashboard.index,
   },
-
   {
     component: './404',
   },

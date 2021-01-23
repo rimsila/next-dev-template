@@ -39,6 +39,7 @@ export const ROUTE = {
     },
   },
   auth: {
+    index: auth,
     register: `${auth}/register`,
     login: `${auth}/login`,
     forgotPassword: `${auth}/forgot-password`,

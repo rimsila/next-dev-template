@@ -16,22 +16,22 @@ export default (initialState: { currentUser: API.IUser }) => {
   // const routeAccess = getMenuData(routes);
 
   //* --- mockUserRole will be from server
-  let mockUserRole: any[] = [];
+  const mockUserRole: any[] = [];
 
-  if (email === 'rimsila.itc@gmail.com') {
-    //* admin
-    mockUserRole = [
-      ...mockAdmin(),
-      PERMISSIONS?.settings?.role.index,
-      PERMISSIONS?.settings?.index,
-    ];
-  } else {
-    mockUserRole = [
-      PERMISSIONS?.stockManagement?.index,
-      PERMISSIONS?.userManagement?.index,
-      PERMISSIONS?.stockManagement?.stockList,
-    ];
-  }
+  // if (email === 'rimsila.itc@gmail.com') {
+  //   //* admin
+  //   mockUserRole = [
+  //     ...mockAdmin(),
+  //     PERMISSIONS?.settings?.role.index,
+  //     PERMISSIONS?.settings?.index,
+  //   ];
+  // } else {
+  //   mockUserRole = [
+  //     PERMISSIONS?.stockManagement?.index,
+  //     PERMISSIONS?.userManagement?.index,
+  //     PERMISSIONS?.stockManagement?.stockList,
+  //   ];
+  // }
 
   const allPermissions = {
     ...PERMISSIONS,

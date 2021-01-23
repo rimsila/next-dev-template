@@ -1,4 +1,7 @@
-import { CURRENCY_TYPE } from '@/constants/currency';
+/* eslint-disable prefer-const */
+import type { IBestAFSRoute } from '@umijs/plugin-layout';
+import { CURRENCY_TYPE } from '../constants/currency';
+import { getLastUrl, toCapitalize } from './stringRegex';
 
 /**
  *
@@ -46,4 +49,48 @@ export const getMoneyBaseCurrency = (param: {
   }
 
   return finalCurrency;
+};
+
+type IPathAccess = {
+  path: string;
+  isCom?: boolean;
+  isName?: boolean;
+  isCommon?: boolean;
+  isMain?: boolean;
+  icon?: string;
+  is404?: boolean;
+  routes?: any[];
+} & IBestAFSRoute;
+/**
+ *
+ * @param path is pathname string
+ * merge access ,component and path has the same path to get short code
+ */
+export const pathAccess = (params: IPathAccess) => {
+  let { path, isMain, isCommon = true, isCom, isName, icon, is404, routes = [], ...rest } =
+    params || {};
+
+  //* isCommon all are include
+  if (isCommon || isMain) {
+    isCom = !isMain;
+    isName = true;
+  }
+
+  const getName = { name: toCapitalize(getLastUrl(path).lastUrlName) };
+
+  const com404 = is404 ? { component: './404' } : {};
+  const component = isCom ? { component: `.${path}` } : {};
+  const name = isName ? getName : {};
+  const neRoutes = routes.length > 0 ? { routes } : {};
+
+  return {
+    access: path,
+    path,
+    icon: icon || 'smile',
+    ...component,
+    ...name,
+    ...com404,
+    ...neRoutes,
+    ...rest,
+  };
 };
