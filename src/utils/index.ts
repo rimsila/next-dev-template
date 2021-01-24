@@ -94,3 +94,22 @@ export const pathAccess = (params: IPathAccess) => {
     ...rest,
   };
 };
+
+export const getOnlyValue = (values: any) => {
+  console.log('values', typeof values);
+
+  Object.keys(values).reduce(({}, key) => {
+    if (
+      values[key] === undefined ||
+      values[key] === '' ||
+      values[key] === null ||
+      values[key] === 'undefined'
+    ) {
+      delete values[key];
+    }
+    return values;
+  });
+
+  return values;
+};
+export const getOnlyArrValue = (arr: any) => arr.filter((el: null) => el != null);
