@@ -1,6 +1,6 @@
 ﻿//* can't alias import here
-
-import { IBestAFSRoute } from '@umijs/plugin-layout';
+// https://github.com/wetrial/wetrial-template/blob/master/config/routes.ts
+import type { IBestAFSRoute } from '@umijs/plugin-layout';
 import { ROUTE } from '../src/constants/routePath';
 import { pathAccess } from '../src/utils';
 

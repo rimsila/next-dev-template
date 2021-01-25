@@ -20,10 +20,6 @@ export const initialStateConfig = {
 
 (function init() {})();
 
-export function render(oldRender) {
-  oldRender();
-}
-
 export async function getInitialState(): Promise<{
   settings?: LayoutSettings;
   currentUser?: API.IUser;
@@ -71,15 +67,15 @@ const appRoot = (props: any) => {
 };
 
 export function rootContainer(container: any) {
-  return React.createElement(appRoot, {}, container);
+  return React.createElement(appRoot, null, container);
 }
 
-export const layout: RunTimeLayoutConfig = ({ initialState, loading }) => {
+export const layout: RunTimeLayoutConfig = ({ initialState }) => {
   return {
     rightContentRender: () => <RightContent />,
     disableContentMargin: true,
-    loading,
     footerRender: () => <Footer />,
+
     onPageChange: () => {
       //* If not log in, redirect to login
       if (
