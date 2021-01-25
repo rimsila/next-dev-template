@@ -98,6 +98,7 @@ export const pathAccess = (params: IPathAccess) => {
 export const getOnlyValue = (values: any) => {
   console.log('values', typeof values);
 
+  // eslint-disable-next-line no-empty-pattern
   Object.keys(values).reduce(({}, key) => {
     if (
       values[key] === undefined ||
