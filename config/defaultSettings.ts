@@ -1,4 +1,5 @@
-import { Settings as LayoutSettings } from '@ant-design/pro-layout';
+import type { Settings as LayoutSettings } from '@ant-design/pro-layout';
+import { COMPANY_NAME } from '../src/constants';
 
 const Settings: LayoutSettings & {
   pwa?: boolean;
@@ -6,9 +7,8 @@ const Settings: LayoutSettings & {
 } = {
   // Daybreak blue
   colorWeak: false,
-  title: 'Next Dev',
+  title: COMPANY_NAME,
   pwa: false,
-  logo: 'https://gw.alipayobjects.com/zos/rmsportal/KDpgvguMpGfqaHPjicRK.svg',
   iconfontUrl: '',
   navTheme: 'dark',
   primaryColor: '#1890ff',

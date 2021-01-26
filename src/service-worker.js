@@ -1,7 +1,9 @@
+import { COMPANY_NAME } from '../src/constants';
+
 /* eslint-disable no-restricted-globals */
 /* globals workbox */
 workbox.core.setCacheNameDetails({
-  prefix: 'next dev',
+  prefix: COMPANY_NAME,
   suffix: 'v5',
 });
 // Control all opened tabs ASAP

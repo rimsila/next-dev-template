@@ -75,7 +75,6 @@ export const layout: RunTimeLayoutConfig = ({ initialState }) => {
     rightContentRender: () => <RightContent />,
     disableContentMargin: true,
     footerRender: () => <Footer />,
-
     onPageChange: () => {
       //* If not log in, redirect to login
       if (

@@ -1,4 +1,4 @@
-export * from '@next-core/constants';
+export * from '@next-dev/core/es/constants';
 
 export const IS_NODE_PROD = process.env.node === 'production';
 export const IS_NODE_DEV = process.env.node === 'development';
@@ -9,5 +9,5 @@ export const IS_PROD = !IS_DEV && !IS_TEST && IS_NODE_PROD;
 
 export const BASE_API_URL = IS_PROD ? REACT_APP_BASE_API_URL : REACT_APP_BASE_API_URL;
 
-export const COMPANY_NAME = 'Next Dev';
+export const COMPANY_NAME = 'YbizTech';
 export const ICON_FONT_URL = '//at.alicdn.com/t/font_2221049_8szkpgxzd38.js';

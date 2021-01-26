@@ -1,6 +1,7 @@
 // https://umijs.org/config/
 import { join } from 'path';
 import { defineConfig } from 'umi';
+import { COMPANY_NAME } from '../src/constants';
 import defaultSettings from './defaultSettings';
 import { routes } from './routes';
 
@@ -12,7 +13,7 @@ const {
 } = process.env;
 
 export default defineConfig({
-  //*---------- all env define here ---------
+  //* ---------- all env define here ---------
   define: {
     REACT_APP_ENV,
     REACT_APP_BASE_API_URL,
@@ -22,7 +23,7 @@ export default defineConfig({
   hash: true,
   antd: {},
   layout: {
-    name: 'Next Dev',
+    name: COMPANY_NAME,
     locale: true,
     siderWidth: 240,
     ...defaultSettings,
