@@ -1,5 +1,4 @@
 import type { Settings as LayoutSettings } from '@ant-design/pro-layout';
-import { COMPANY_NAME } from '../src/constants';
 
 const Settings: LayoutSettings & {
   pwa?: boolean;
@@ -7,9 +6,9 @@ const Settings: LayoutSettings & {
 } = {
   // Daybreak blue
   colorWeak: false,
-  title: COMPANY_NAME,
+  title: 'YbizTech',
   pwa: false,
-  iconfontUrl: '',
+  iconfontUrl: '//at.alicdn.com/t/font_2221049_ku7i16j3o4j.js',
   navTheme: 'dark',
   primaryColor: '#1890ff',
   layout: 'side',

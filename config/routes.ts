@@ -9,22 +9,24 @@ import { mapPathAccess, pathAccess } from '../src/utils';
  */
 
 export const routes: IBestAFSRoute[] = [
-  //* ----------- UserManagement --------------
   {
     path: ROUTE.home,
     flatMenu: true,
     routes: [
+      //* ----------- dashboard --------------
       {
         path: ROUTE.home,
         redirect: ROUTE.dashboard.index,
       },
-      //* ----------- dashboard --------------
-      pathAccess({ path: ROUTE.dashboard.index }),
+      pathAccess({ path: ROUTE.dashboard.index, icon: 'DashboardOutlined' }),
+
+      //* ----------- UserManagement --------------
 
       ...(pathAccess({
         isMain: true,
         path: ROUTE.userManagement.index,
         redirect: ROUTE.userManagement.user.index,
+        icon: 'UserOutlined',
         routes: [
           pathAccess({ path: ROUTE.userManagement.user.index }),
           pathAccess({ path: ROUTE.userManagement.permission.index }),
@@ -34,6 +36,7 @@ export const routes: IBestAFSRoute[] = [
       //* ----------- supplierManagement --------------
       ...(pathAccess({
         isMain: true,
+        icon: 'icon-supplier-white',
         path: ROUTE.supplierManagement.index,
         redirect: ROUTE.supplierManagement.company.index,
         routes: [
@@ -49,6 +52,7 @@ export const routes: IBestAFSRoute[] = [
         path: ROUTE.productManagement.index,
         isMain: true,
         redirect: ROUTE.productManagement.product.index,
+        icon: 'icon-Activityproduct',
         routes: [
           pathAccess({ path: ROUTE.productManagement.product.index }),
           pathAccess({ path: ROUTE.productManagement.category.index }),
@@ -56,21 +60,22 @@ export const routes: IBestAFSRoute[] = [
       }) as []),
 
       //* ----------- accountManagement --------------
-      pathAccess({ path: ROUTE.accountManagement.index }),
+      pathAccess({ path: ROUTE.accountManagement.index, icon: 'icon-users-white' }),
 
       //* ----------- reportManagement --------------
 
-      pathAccess({ path: ROUTE.reportManagement.index }),
+      pathAccess({ path: ROUTE.reportManagement.index, icon: 'icon-next-report-white' }),
 
       //* ----------- hrManagement --------------
 
-      pathAccess({ path: ROUTE.hrManagement.index }),
+      pathAccess({ path: ROUTE.hrManagement.index, icon: 'icon-hr-white' }),
 
       //* ----------- Sale Management  --------------
       ...(pathAccess({
         path: ROUTE.saleManagement.index,
         isMain: true,
         redirect: ROUTE.saleManagement.pos.index,
+        icon: 'icon-sale-white',
         routes: [
           pathAccess({ path: ROUTE.saleManagement.pos.index }),
           ...(pathAccess({
@@ -98,6 +103,7 @@ export const routes: IBestAFSRoute[] = [
         ...pathAccess({
           path: ROUTE.setting.index,
           isMain: true,
+          icon: 'icon-setting-white',
           routes: [
             ...mapPathAccess([
               { path: ROUTE.setting.country.index },

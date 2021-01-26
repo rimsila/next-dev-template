@@ -1,4 +1,4 @@
-import { LAYOUT_FORM_SINGLE, LAYOUT_FORM_TWO } from '@/constants';
+import { LAYOUT_FORM_SINGLE, LAYOUT_FORM_TWO } from '@next-core/constants';
 import { Col, Form, Row, Tree } from 'antd';
 import type { FormProps } from 'antd/lib/form';
 import React from 'react';

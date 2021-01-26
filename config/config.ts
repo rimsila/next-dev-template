@@ -1,7 +1,6 @@
 // https://umijs.org/config/
 import { join } from 'path';
 import { defineConfig } from 'umi';
-import { COMPANY_NAME } from '../src/constants';
 import defaultSettings from './defaultSettings';
 import { routes } from './routes';
 
@@ -23,7 +22,7 @@ export default defineConfig({
   hash: true,
   antd: {},
   layout: {
-    name: COMPANY_NAME,
+    name: 'YbizTech',
     locale: true,
     siderWidth: 240,
     ...defaultSettings,
