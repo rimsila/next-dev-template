@@ -1,7 +1,7 @@
 /* eslint-disable prefer-const */
 import type { IBestAFSRoute } from '@umijs/plugin-layout';
 import { CURRENCY_TYPE } from '../constants/currency';
-import { getLastUrl, toCapitalize } from './stringRegex';
+import { getLastUrl } from './stringRegex';
 
 /**
  *
@@ -60,6 +60,7 @@ type IPathAccess = {
   icon?: string;
   is404?: boolean;
   routes?: any[];
+  redirect?: string;
 } & IBestAFSRoute;
 /**
  *
@@ -67,8 +68,18 @@ type IPathAccess = {
  * merge access ,component and path has the same path to get short code
  */
 export const pathAccess = (params: IPathAccess) => {
-  let { path, isMain, isCommon = true, isCom, isName, icon, is404, routes = [], ...rest } =
-    params || {};
+  let {
+    path,
+    isMain,
+    isCommon = true,
+    isCom,
+    isName,
+    icon,
+    is404,
+    routes = [],
+    redirect,
+    ...rest
+  } = params || {};
 
   //* isCommon all are include
   if (isCommon || isMain) {
@@ -76,14 +87,14 @@ export const pathAccess = (params: IPathAccess) => {
     isName = true;
   }
 
-  const getName = { name: toCapitalize(getLastUrl(path).lastUrlName) };
+  const getName = { name: getLastUrl(path)?.finalRouteName };
 
   const com404 = is404 ? { component: './404' } : {};
   const component = isCom ? { component: `.${path}` } : {};
   const name = isName ? getName : {};
   const neRoutes = routes.length > 0 ? { routes } : {};
 
-  return {
+  const normalRoute = {
     access: path,
     path,
     icon: icon || 'smile',
@@ -93,11 +104,29 @@ export const pathAccess = (params: IPathAccess) => {
     ...neRoutes,
     ...rest,
   };
+
+  const redirectRoute = {
+    path,
+    redirect,
+  };
+
+  if (isMain && redirect) {
+    return [redirectRoute, normalRoute];
+  }
+  return normalRoute;
+};
+/**
+ *
+ * @param path func map subRoute
+ */
+export const mapPathAccess = (path: any[] = []) => {
+  if (path.length > 0) {
+    return path?.map((v) => pathAccess({ path: v.path }));
+  }
+  return [];
 };
 
 export const getOnlyValue = (values: any) => {
-  console.log('values', typeof values);
-
   // eslint-disable-next-line no-empty-pattern
   Object.keys(values).reduce(({}, key) => {
     if (

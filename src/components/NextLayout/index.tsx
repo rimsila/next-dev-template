@@ -11,14 +11,24 @@ type ILayout = {
   contentInnerStyle?: CSSProperties;
   cardProps?: ProCardProps;
   isEmptyLayout?: boolean;
+  isShowBreadcrumb?: boolean;
 } & PageContainerProps;
 
 export default (props: ILayout) => {
-  const { children, contentInnerStyle, cardProps, isEmptyLayout, ...rest } = props;
+  const {
+    children,
+    contentInnerStyle,
+    cardProps,
+    isEmptyLayout,
+    isShowBreadcrumb,
+    ...rest
+  } = props;
+  const breadcrumb = isShowBreadcrumb ? {} : { breadcrumb: undefined };
+
   return (
     <PageContainer
       {...{
-        breadcrumb: undefined,
+        ...breadcrumb,
         className: isEmptyLayout ? css.next_layout : '',
         title: isEmptyLayout,
         ...rest,

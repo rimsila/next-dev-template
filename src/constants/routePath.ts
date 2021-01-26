@@ -52,7 +52,9 @@ export const ROUTE = {
     user: {
       index: userManagement + user,
     },
-    permission: `${userManagement}/permission`,
+    permission: {
+      index: `${userManagement}/permission`,
+    },
   },
 
   //* ----------- supplierManagement --------------
